@@ -1,16 +1,18 @@
 # 📅 Broadcast Scheduler
 
-╔══════════════════════════════════════════════╗
-║            📅 Broadcast Scheduler            ║
-║        RadioBOSS Schedule Analyzer           ║
-╚══════════════════════════════════════════════╝
-![Version](https://img.shields.io/badge/version-2.3.0-blue.svg)
-![Python](https://img.shields.io/badge/Python-3.14-yellow.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Version](https://img.shields.io/badge/version-2.3.0-blue)
+![Python](https://img.shields.io/badge/Python-3.14-yellow)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 Broadcast Scheduler ist ein Analyse- und Planungswerkzeug für **RadioBOSS**.
 
-Das Programm liest die originale **Admin.sdl** von RadioBOSS ein und erzeugt daraus einen übersichtlichen Wochenplan. Dadurch lassen sich Sendeabläufe kontrollieren, Fehler erkennen und Programmschemata überprüfen.
+Das Programm liest die originale **Admin.sdl** von RadioBOSS ein und erzeugt daraus einen übersichtlichen Wochen- oder Monatsplan. Dadurch lassen sich Sendeabläufe kontrollieren, Programmfehler erkennen und Sendeschemata überprüfen.
+
+---
+
+# 🖥 Screenshot
+
+![Broadcast Scheduler](screenshot_01.PNG)
 
 ---
 
@@ -20,54 +22,49 @@ Das Programm liest die originale **Admin.sdl** von RadioBOSS ein und erzeugt dar
 
 - ✅ Admin.sdl einlesen
 - ✅ RadioBOSS Events analysieren
-- ✅ Wochenplan erzeugen
 - ✅ Aktuelle Kalenderwoche automatisch erkennen
+- ✅ Wochenplan erzeugen
 - ✅ Sortierbare Tabelle
-- ✅ Vertikale und horizontale Scrollbars
 - ✅ Toolbar
+- ✅ Vertikale und horizontale Scrollbars
 - ✅ Statusleiste
-- ✅ Unterstützung mehrerer Minuten (z.B. 17,43)
+- ✅ Mehrere Minuten pro Stunde (z.B. `17,43`)
+- ✅ Unterstützung von `TimeType = 1`
 
 ---
 
-# 🚧 Geplante Funktionen
+# 🚧 Roadmap
 
 ## Version 2.4
 
 - Gruppen anzeigen
-- Toolbar erweitern
-- Doppelklick auf Events
-- bessere Statusleiste
 - Detailfenster
+- Toolbar erweitern
+- Verbesserte Statusleiste
+- Wochennavigation
 
 ## Version 2.5
 
 - Monatsansicht
-- Wochennavigation
-- Konflikterkennung
 - Programmlücken erkennen
 - Überschneidungen erkennen
+- Konflikterkennung
+- Suchfunktion
 
 ## Version 3.0
 
 - PDF Export
 - CSV Export
 - Druckfunktion
-- Suchfunktion
-- Filter
 - Farbige Eventtypen
-
----
-
-# 🖥 Screenshot
-
-*(Screenshot folgt)*
+- Erweiterte Filter
+- Statistik
 
 ---
 
 # 📂 Projektstruktur
 
-```
+```text
 BroadcastScheduler
 │
 ├── checker.py
@@ -80,7 +77,8 @@ BroadcastScheduler
 ├── schedule_engine.py
 ├── scheduler.py
 ├── settings.example.json
-└── README.md
+├── README.md
+└── screenshot_01.PNG
 ```
 
 ---
@@ -107,19 +105,21 @@ Projektordner öffnen
 cd BroadcastScheduler
 ```
 
-Datei
+Die Datei
 
-```
+```text
 settings.example.json
 ```
 
-kopieren nach
+nach
 
-```
+```text
 settings.json
 ```
 
-und den Pfad zur eigenen **Admin.sdl** eintragen.
+kopieren.
+
+Anschließend den Pfad zur eigenen **Admin.sdl** eintragen.
 
 Beispiel:
 
@@ -129,7 +129,7 @@ Beispiel:
 }
 ```
 
-Danach starten
+Programm starten
 
 ```bash
 py scheduler.py
@@ -137,9 +137,9 @@ py scheduler.py
 
 ---
 
-# 📅 Unterstützte RadioBOSS Daten
+# 📅 Unterstützte RadioBOSS Funktionen
 
-Der Scheduler verarbeitet derzeit
+Der Scheduler unterstützt derzeit:
 
 - Days
 - Hours
@@ -147,15 +147,15 @@ Der Scheduler verarbeitet derzeit
 - Seconds
 - TimeType 1
 
-Weitere Eventtypen werden in zukünftigen Versionen ergänzt.
+Weitere RadioBOSS-Funktionen werden schrittweise ergänzt.
 
 ---
 
 # 🎯 Ziel des Projekts
 
-Broadcast Scheduler soll kein Ersatz für RadioBOSS sein.
+Broadcast Scheduler ist **kein Ersatz für RadioBOSS**.
 
-Das Ziel ist ein Werkzeug, mit dem man innerhalb weniger Sekunden erkennen kann:
+Das Ziel ist ein Analysewerkzeug, das innerhalb weniger Sekunden zeigt:
 
 - Welche Events laufen diese Woche?
 - Gibt es Programmlücken?
@@ -168,13 +168,15 @@ Das Ziel ist ein Werkzeug, mit dem man innerhalb weniger Sekunden erkennen kann:
 
 # 🤝 Mitarbeit
 
-Fehlerberichte und Verbesserungsvorschläge sind jederzeit willkommen.
+Verbesserungsvorschläge, Fehlerberichte und Pull Requests sind jederzeit willkommen.
 
 ---
 
 # 📜 Lizenz
 
-MIT License
+Dieses Projekt steht unter der **MIT License**.
+
+Weitere Informationen siehe Datei **LICENSE**.
 
 ---
 
@@ -183,3 +185,7 @@ MIT License
 **Raymond Ummels**
 
 Entwicklung mit Unterstützung von ChatGPT.
+
+---
+
+⭐ Falls dir dieses Projekt gefällt, freue ich mich über einen **Star auf GitHub**.
