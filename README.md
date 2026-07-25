@@ -1,4 +1,4 @@
-# 📅 Broadcast Scheduler
+# 📅 Broadcast Scheduler for RadioBOSS
 
 ![Version](https://img.shields.io/badge/version-2.3.0-blue)
 ![Python](https://img.shields.io/badge/Python-3.14-yellow)
