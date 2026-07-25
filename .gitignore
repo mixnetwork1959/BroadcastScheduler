@@ -216,3 +216,32 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+__pycache__/
+*.pyc
+*.pyo
+
+.vscode/
+.idea/
+
+Admin.sdl
+
+*.log
+
+# ==========================================
+# Broadcast Scheduler
+# ==========================================
+
+# RadioBOSS-Daten
+Admin.sdl
+
+# Lokale Einstellungen
+settings.local.json
+
+# Exporte
+exports/
+reports/
+
+# Windows
+Thumbs.db
+Desktop.ini

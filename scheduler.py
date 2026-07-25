@@ -1,14 +1,15 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 0.2.3
+# Version 2.0.0
 # scheduler.py
 # ==========================================
 
 from config import load_settings
-from parser import load_events
+from database import Database
+from schedule_engine import ScheduleEngine
 from gui import show_events
 
-VERSION = "0.2.3"
+VERSION = "2.0.0"
 
 
 def main():
@@ -17,31 +18,23 @@ def main():
     print(f" Broadcast Scheduler v{VERSION}")
     print("=" * 45)
 
+    # Einstellungen laden
     settings = load_settings()
 
-    filename = settings.get("admin_sdl", "")
+    # Datenbank öffnen
+    db = Database(settings)
 
-    if not filename:
-        print()
-        print("Bitte den Pfad zur Admin.sdl in der")
-        print("settings.json eintragen.")
-        return
+    # Events laden
+    events = db.load_events()
+    print(f"Events geladen: {len(events)}")
 
-    try:
-        events = load_events(filename)
-
-    except Exception as e:
-        print()
-        print("Fehler:")
-        print(e)
-        return
+    # Wochenplan erzeugen
+    engine = ScheduleEngine()
+    runtimes = engine.generate(events)
+    print(f"RunTimes erzeugt: {len(runtimes)}")
 
     # GUI starten
-    show_events(
-        filename=filename,
-        events=events,
-        version=VERSION
-    )
+    show_events(runtimes)
 
 
 if __name__ == "__main__":

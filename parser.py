@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 0.1.1
+# Version 0.1.2
 # parser.py
 # ==========================================
 
@@ -133,17 +133,21 @@ def load_events(filename):
                     current["DayList"] = decode_days(current["Days"])
                     current["HourList"] = decode_hours(current["Hours"])
                     current["TimeBlocks"] = build_time_blocks(
-                    current["HourList"]
+                        current["HourList"]
                     )
-                    print("-" * 40)
+
                     events.append(current)
 
                 current = {
+                    "ID": "",
                     "TaskName": "",
+                    "GroupName": "",
+                    "FileName": "",
                     "EnabledEvent": "0",
                     "Days": "",
                     "Hours": "",
-                    "Minutes": ""
+                    "Minutes": "",
+                    "Seconds": ""
                 }
 
                 continue
