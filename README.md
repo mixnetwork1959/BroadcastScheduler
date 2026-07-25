@@ -61,7 +61,8 @@ Das Programm liest die originale **Admin.sdl** von RadioBOSS ein und erzeugt dar
 
 # 🖥 Screenshot
 
-*(Screenshot folgt)*
+
+![Broadcast Scheduler](screenshot_01.PNG)
 
 ---
 
