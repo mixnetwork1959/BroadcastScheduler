@@ -4,9 +4,9 @@
 ![Python](https://img.shields.io/badge/Python-3.14-yellow)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-Broadcast Scheduler ist ein Analyse- und Planungswerkzeug für **RadioBOSS**.
+Broadcast Scheduler is an analysis and planning tool for **RadioBOSS**.
 
-Das Programm liest die originale **Admin.sdl** von RadioBOSS ein und erzeugt daraus einen übersichtlichen Wochen- oder Monatsplan. Dadurch lassen sich Sendeabläufe kontrollieren, Programmfehler erkennen und Sendeschemata überprüfen.
+The application reads the original **Admin.sdl** file created by RadioBOSS and generates a clear weekly or monthly schedule. This makes it easy to review broadcast schedules, identify programming issues, and verify schedule configurations.
 
 ---
 
@@ -16,20 +16,20 @@ Das Programm liest die originale **Admin.sdl** von RadioBOSS ein und erzeugt dar
 
 ---
 
-# ✨ Funktionen
+# ✨ Features
 
-## Bereits verfügbar
+## Currently Available
 
-- ✅ Admin.sdl einlesen
-- ✅ RadioBOSS Events analysieren
-- ✅ Aktuelle Kalenderwoche automatisch erkennen
-- ✅ Wochenplan erzeugen
-- ✅ Sortierbare Tabelle
+- ✅ Read and parse `Admin.sdl`
+- ✅ Analyze RadioBOSS events
+- ✅ Automatically detect the current calendar week
+- ✅ Generate a weekly schedule
+- ✅ Sortable event table
 - ✅ Toolbar
-- ✅ Vertikale und horizontale Scrollbars
-- ✅ Statusleiste
-- ✅ Mehrere Minuten pro Stunde (z.B. `17,43`)
-- ✅ Unterstützung von `TimeType = 1`
+- ✅ Vertical and horizontal scrollbars
+- ✅ Status bar
+- ✅ Support for multiple minutes per hour (e.g. `17,43`)
+- ✅ Support for `TimeType = 1`
 
 ---
 
@@ -37,32 +37,32 @@ Das Programm liest die originale **Admin.sdl** von RadioBOSS ein und erzeugt dar
 
 ## Version 2.4
 
-- Gruppen anzeigen
-- Detailfenster
-- Toolbar erweitern
-- Verbesserte Statusleiste
-- Wochennavigation
+- Display event groups
+- Event details window
+- Extended toolbar
+- Improved status bar
+- Week navigation
 
 ## Version 2.5
 
-- Monatsansicht
-- Programmlücken erkennen
-- Überschneidungen erkennen
-- Konflikterkennung
-- Suchfunktion
+- Monthly view
+- Detect scheduling gaps
+- Detect overlapping events
+- Conflict detection
+- Search function
 
 ## Version 3.0
 
-- PDF Export
-- CSV Export
-- Druckfunktion
-- Farbige Eventtypen
-- Erweiterte Filter
-- Statistik
+- PDF export
+- CSV export
+- Print support
+- Color-coded event types
+- Advanced filters
+- Statistics
 
 ---
 
-# 📂 Projektstruktur
+# 📂 Project Structure
 
 ```text
 BroadcastScheduler
@@ -83,45 +83,43 @@ BroadcastScheduler
 
 ---
 
-# ⚙ Voraussetzungen
+# ⚙ Requirements
 
 - Windows 10 / Windows 11
-- Python 3.14 oder neuer
+- Python 3.14 or later
 - RadioBOSS
 
 ---
 
 # 🚀 Installation
 
-Repository klonen
+Clone the repository:
 
 ```bash
 git clone https://github.com/mixnetwork1959/BroadcastScheduler.git
 ```
 
-Projektordner öffnen
+Open the project folder:
 
 ```bash
 cd BroadcastScheduler
 ```
 
-Die Datei
+Copy
 
 ```text
 settings.example.json
 ```
 
-nach
+to
 
 ```text
 settings.json
 ```
 
-kopieren.
+Then edit the file and enter the path to your own **Admin.sdl** file.
 
-Anschließend den Pfad zur eigenen **Admin.sdl** eintragen.
-
-Beispiel:
+Example:
 
 ```json
 {
@@ -129,7 +127,7 @@ Beispiel:
 }
 ```
 
-Programm starten
+Start the application:
 
 ```bash
 py scheduler.py
@@ -137,9 +135,9 @@ py scheduler.py
 
 ---
 
-# 📅 Unterstützte RadioBOSS Funktionen
+# 📅 Supported RadioBOSS Features
 
-Der Scheduler unterstützt derzeit:
+The scheduler currently supports:
 
 - Days
 - Hours
@@ -147,45 +145,45 @@ Der Scheduler unterstützt derzeit:
 - Seconds
 - TimeType 1
 
-Weitere RadioBOSS-Funktionen werden schrittweise ergänzt.
+Support for additional RadioBOSS features will be added in future releases.
 
 ---
 
-# 🎯 Ziel des Projekts
+# 🎯 Project Goal
 
-Broadcast Scheduler ist **kein Ersatz für RadioBOSS**.
+Broadcast Scheduler is **not intended to replace RadioBOSS**.
 
-Das Ziel ist ein Analysewerkzeug, das innerhalb weniger Sekunden zeigt:
+Its purpose is to provide a fast and convenient way to analyze your broadcast schedule and answer questions such as:
 
-- Welche Events laufen diese Woche?
-- Gibt es Programmlücken?
-- Gibt es Überschneidungen?
-- Stimmen Moderationen?
-- Stimmen News-Events?
-- Ist das Programmschema korrekt?
-
----
-
-# 🤝 Mitarbeit
-
-Verbesserungsvorschläge, Fehlerberichte und Pull Requests sind jederzeit willkommen.
+- Which events are scheduled for this week?
+- Are there any scheduling gaps?
+- Are there overlapping events?
+- Are moderator events scheduled correctly?
+- Are news events configured correctly?
+- Is the broadcast schedule working as intended?
 
 ---
 
-# 📜 Lizenz
+# 🤝 Contributing
 
-Dieses Projekt steht unter der **MIT License**.
-
-Weitere Informationen siehe Datei **LICENSE**.
+Bug reports, feature requests, and pull requests are always welcome.
 
 ---
 
-# 👤 Autor
+# 📜 License
+
+This project is licensed under the **MIT License**.
+
+For more information, see the **LICENSE** file.
+
+---
+
+# 👤 Author
 
 **Raymond Ummels**
 
-Entwicklung mit Unterstützung von ChatGPT.
+Developed with the assistance of ChatGPT.
 
 ---
 
-⭐ Falls dir dieses Projekt gefällt, freue ich mich über einen **Star auf GitHub**.
+⭐ If you find this project useful, please consider giving it a **Star** on GitHub.
