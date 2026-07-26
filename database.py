@@ -40,7 +40,6 @@ class Database:
                 if not line:
                     continue
 
-                # Neuer Event-Block
                 if line.lower().startswith("[event"):
 
                     if current:
@@ -48,31 +47,20 @@ class Database:
 
                     current = {
                         "id": "",
-
-                        # Allgemein
                         "name": "",
                         "filename": "",
                         "group": "",
-
                         "enabled": False,
-
-                        # Datum
                         "datetime": "",
                         "use_date": False,
                         "every_year": False,
-
-                        # Wochentage / Uhrzeit
                         "use_days_of_week": False,
                         "days": "",
                         "hours": "",
                         "minutes": "",
                         "seconds": 0,
-
-                        # Ausführungsart
                         "time_type": 0,
                         "immediately": False,
-
-                        # Wiederholung
                         "repeat": 0,
                         "repeat_period": 0,
                         "repeat_count": 0,
@@ -88,68 +76,49 @@ class Database:
                     continue
 
                 key, value = line.split("=", 1)
-
                 key = key.strip()
                 value = value.strip()
 
                 if key == "ID":
                     current["id"] = value
-
                 elif key == "TaskName":
                     current["name"] = value
-
                 elif key == "FileName":
                     current["filename"] = value
-
                 elif key == "GroupName":
                     current["group"] = value
-
                 elif key == "EnabledEvent":
                     current["enabled"] = (value == "1")
-
                 elif key == "DateTime":
                     current["datetime"] = value
-
                 elif key == "UseDate":
                     current["use_date"] = (value == "1")
-
                 elif key == "EveryYear":
                     current["every_year"] = (value == "1")
-
                 elif key == "UseDaysOfWeek":
                     current["use_days_of_week"] = (value == "1")
-
                 elif key == "Days":
                     current["days"] = value
-
                 elif key == "Hours":
                     current["hours"] = value
-
                 elif key == "Minutes":
                     current["minutes"] = value
-
                 elif key == "Seconds":
                     current["seconds"] = int(value) if value else 0
-
                 elif key == "TimeType":
                     current["time_type"] = int(value) if value else 0
-
                 elif key == "Immediately":
                     current["immediately"] = (value == "1")
-
                 elif key == "Repeat":
                     current["repeat"] = int(value) if value else 0
-
                 elif key == "RepeatPeriod":
                     current["repeat_period"] = int(value) if value else 0
-
                 elif key == "RepeatCount":
                     current["repeat_count"] = int(value) if value else 0
-
                 elif key == "RepeatLimit":
                     current["repeat_limit"] = int(value) if value else 0
+            
+            if current:
+                events.append(Event(**current))
 
-        if current:
-            events.append(Event(**current))
-
-        return events
+            return events

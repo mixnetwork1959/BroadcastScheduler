@@ -1,8 +1,5 @@
 # 📅 Broadcast Scheduler for RadioBOSS
-
-![Version](https://img.shields.io/badge/version-2.3.0-blue)
-![Python](https://img.shields.io/badge/Python-3.14-yellow)
-![License](https://img.shields.io/badge/License-MIT-green)
+![Version](https://img.shields.io/badge/version-2.5.2-blue)
 
 Broadcast Scheduler is an analysis and planning tool for **RadioBOSS**.
 
@@ -21,13 +18,17 @@ The application reads the original **Admin.sdl** file created by RadioBOSS and g
 ## Currently Available
 
 - ✅ Read and parse `Admin.sdl`
-- ✅ Analyze RadioBOSS events
-- ✅ Automatically detect the current calendar week
-- ✅ Generate a weekly schedule
-- ✅ Sortable event table
-- ✅ Toolbar
-- ✅ Vertical and horizontal scrollbars
+- ✅ Weekly calendar view
+- ✅ Event list
+- ✅ Conflict detection
+- ✅ Conflict highlighting
+- ✅ Search
+- ✅ Group filter
+- ✅ Show only conflicts
+- ✅ Previous / Today / Next Week navigation
+- ✅ Monthly view (preview)
 - ✅ Status bar
+- ✅ Vertical and horizontal scrolling
 - ✅ Support for multiple minutes per hour (e.g. `17,43`)
 - ✅ Support for `TimeType = 1`
 
@@ -35,21 +36,20 @@ The application reads the original **Admin.sdl** file created by RadioBOSS and g
 
 # 🚧 Roadmap
 
-## Version 2.4
+## Version 2.6
 
-- Display event groups
-- Event details window
-- Extended toolbar
-- Improved status bar
-- Week navigation
+- Event Details
+- Improved conflict rules
+- Better conflict visualization
+- Automatic text clipping
+- Better calendar scaling
+- Configurable colors
 
-## Version 2.5
+## Version 2.7
 
-- Monthly view
-- Detect scheduling gaps
-- Detect overlapping events
-- Conflict detection
-- Search function
+- Timeline View
+- Daily View
+- Improved statistics
 
 ## Version 3.0
 
@@ -79,16 +79,59 @@ BroadcastScheduler
 ├── settings.example.json
 ├── README.md
 └── screenshot_01.PNG
-```
+└── screenshot_02.PNG
+└── screenshot_03.PNG
+└── screenshot_04.PNG
 
+```
+# ⚠ Conflict Detection
+
+Broadcast Scheduler automatically detects events that start at exactly the same time.
+
+Conflicts are displayed
+
+- in the Event List
+- in the Weekly Calendar
+
+A conflict does not necessarily mean that the schedule is incorrect.
+
+It simply indicates that two or more events start simultaneously and should be reviewed.
 ---
+# 🎨 Calendar Colors
+
+Blue
+Music
+
+Green
+Jingles
+
+Yellow
+Updates
+
+Purple
+Moderation
+
+Red
+Conflict detected
 
 # ⚙ Requirements
 
 - Windows 10 / Windows 11
 - Python 3.14 or later
 - RadioBOSS
+- Tkinter (included with Python)
 
+
+# Known Limitations
+
+Currently supported:
+
+- TimeType 1
+
+Planned:
+
+- Additional RadioBOSS scheduling options
+- Advanced Repeat Rules
 ---
 
 # 🚀 Installation
