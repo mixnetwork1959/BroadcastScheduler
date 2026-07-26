@@ -7,9 +7,16 @@ The application reads the original **Admin.sdl** file created by RadioBOSS and g
 
 ---
 
-# 🖥 Screenshot
+# 🖥 Screenshots
 
-![Broadcast Scheduler](screenshot_01.PNG)
+## Start View
+![Start View](images/screenshot_01_start_view.PNG)
+
+## Weekly Calendar
+![Weekly Calendar](images/screenshot_02_calendar_view.PNG)
+
+## Possible Conflicts
+![Possible Conflicts](images/screenshot_03_possible_conflicts.PNG)
 
 ---
 
