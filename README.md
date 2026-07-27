@@ -1,10 +1,17 @@
 # 📅 Broadcast Scheduler for RadioBOSS
-![Version](https://img.shields.io/badge/version-2.5.2-blue)
+![Version](https://img.shields.io/badge/version-2.7.0--alpha1-blue)
 
 Broadcast Scheduler is an analysis and planning tool for **RadioBOSS**.
 
 The application reads the original **Admin.sdl** file created by RadioBOSS and generates a clear weekly or monthly schedule. This makes it easy to review broadcast schedules, identify programming issues, and verify schedule configurations.
 
+## Highlights
+
+- Clean modular architecture
+- Weekly schedule visualization
+- Automatic conflict detection
+- Fast RadioBOSS schedule analysis
+- Open source (MIT License)
 ---
 
 # 🖥 Screenshots
@@ -21,6 +28,11 @@ The application reads the original **Admin.sdl** file created by RadioBOSS and g
 ---
 
 # ✨ Features
+- ✅ Modular GUI architecture
+- ✅ Weekly calendar
+- ✅ Event list
+- ✅ Status bar
+- ✅ Search and filters
 
 ## Currently Available
 
@@ -43,53 +55,41 @@ The application reads the original **Admin.sdl** file created by RadioBOSS and g
 
 # 🚧 Roadmap
 
-## Version 2.6
+## Version 2.7.0-alpha1
 
-- Event Details
-- Improved conflict rules
-- Better conflict visualization
-- Automatic text clipping
-- Better calendar scaling
-- Configurable colors
-
-## Version 2.7
-
-- Timeline View
-- Daily View
-- Improved statistics
-
-## Version 3.0
-
-- PDF export
-- CSV export
-- Print support
-- Color-coded event types
-- Advanced filters
-- Statistics
-
+- ✅ Complete GUI refactoring
+- ✅ Modular architecture
+- ✅ TreeView module
+- ✅ Calendar module
+- ✅ Filter module
+- ✅ Toolbar module
+- ✅ Statusbar module
 ---
 
 # 📂 Project Structure
 
-```text
 BroadcastScheduler
 │
+├── analyzer.py
 ├── checker.py
 ├── config.py
 ├── database.py
 ├── gui.py
-├── LICENSE
+├── gui_calendar.py
+├── gui_filter.py
+├── gui_menu.py
+├── gui_statusbar.py
+├── gui_toolbar.py
+├── gui_tree.py
+├── gui_treeview.py
 ├── models.py
 ├── parser.py
 ├── schedule_engine.py
 ├── scheduler.py
+├── scheduler_controller.py
 ├── settings.example.json
 ├── README.md
-└── screenshot_01.PNG
-└── screenshot_02.PNG
-└── screenshot_03.PNG
-└── screenshot_04.PNG
-
+└── LICENSE
 ```
 # ⚠ Conflict Detection
 
@@ -121,10 +121,11 @@ Moderation
 Red
 Conflict detected
 
+
 # ⚙ Requirements
 
 - Windows 10 / Windows 11
-- Python 3.14 or later
+Python 3.12 or newer
 - RadioBOSS
 - Tkinter (included with Python)
 
