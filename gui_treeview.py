@@ -1,0 +1,148 @@
+# ==========================================
+# Broadcast Scheduler
+# Version 2.7.0
+# gui_treeview.py
+# ==========================================
+
+import tkinter as tk
+from tkinter import ttk
+
+
+# =====================================================
+# Create TreeView
+# =====================================================
+
+def create_treeview(parent):
+
+    frame = ttk.Frame(parent)
+
+    frame.pack(
+        fill="both",
+        expand=True,
+        padx=6,
+        pady=6
+    )
+
+    columns = (
+        "Status",
+        "Start",
+        "Group",
+        "Event"
+    )
+
+    tree = ttk.Treeview(
+        frame,
+        columns=columns,
+        show="headings"
+    )
+
+    # -------------------------------------------------
+    # Scrollbars
+    # -------------------------------------------------
+
+    vsb = tk.Scrollbar(
+        frame,
+        orient="vertical",
+        command=tree.yview,
+        width=20
+    )
+
+    hsb = tk.Scrollbar(
+        frame,
+        orient="horizontal",
+        command=tree.xview,
+        width=20
+    )
+
+    tree.configure(
+        yscrollcommand=vsb.set,
+        xscrollcommand=hsb.set
+    )
+
+    # -------------------------------------------------
+    # Row Tags
+    # -------------------------------------------------
+
+    tree.tag_configure(
+        "conflict",
+        background="#FFF4CC"
+    )
+
+    # -------------------------------------------------
+    # Headings
+    # -------------------------------------------------
+
+    for column in columns:
+
+        tree.heading(
+            column,
+            text=column
+        )
+
+    # -------------------------------------------------
+    # Columns
+    # -------------------------------------------------
+
+    tree.column(
+        "Status",
+        width=90,
+        anchor="center"
+    )
+
+    tree.column(
+        "Start",
+        width=190,
+        anchor="center"
+    )
+
+    tree.column(
+        "Group",
+        width=220,
+        anchor="w"
+    )
+
+    tree.column(
+        "Event",
+        width=820,
+        anchor="w"
+    )
+
+    # -------------------------------------------------
+    # Layout
+    # -------------------------------------------------
+
+    tree.grid(
+        row=0,
+        column=0,
+        sticky="nsew"
+    )
+
+    vsb.grid(
+        row=0,
+        column=1,
+        sticky="ns"
+    )
+
+    hsb.grid(
+        row=1,
+        column=0,
+        sticky="ew"
+    )
+
+    frame.rowconfigure(
+        0,
+        weight=1
+    )
+
+    frame.columnconfigure(
+        0,
+        weight=1
+    )
+
+    return (
+        frame,
+        tree,
+        columns,
+        vsb,
+        hsb
+    )

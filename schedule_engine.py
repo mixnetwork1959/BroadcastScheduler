@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 2.1.1
+# Version 2.2.0
 # schedule_engine.py
 # ==========================================
 
@@ -16,10 +16,11 @@ class ScheduleEngine:
         self.week_start = None
         self.week_end = None
 
-    def get_current_week(self):
+    def get_current_week(self, week_offset: int = 0):
         today = datetime.now()
 
         monday = today - timedelta(days=today.weekday())
+        monday += timedelta(weeks=week_offset)
         monday = monday.replace(hour=0, minute=0, second=0, microsecond=0)
 
         sunday = monday + timedelta(days=6)
@@ -96,8 +97,13 @@ class ScheduleEngine:
 
         return runtimes
 
-    def generate(self, events: List[Event]) -> List[RunTime]:
-        self.get_current_week()
+    def generate(
+        self,
+        events: List[Event],
+        week_offset: int = 0
+    ) -> List[RunTime]:
+
+        self.get_current_week(week_offset)
 
         runtimes: List[RunTime] = []
 

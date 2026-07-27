@@ -1,16 +1,15 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 2.5.0
+# Version 2.6.0
 # scheduler.py
 # ==========================================
 
 from config import load_settings
 from database import Database
-from schedule_engine import ScheduleEngine
-from analyzer import Analyzer
+from scheduler_controller import SchedulerController
 from gui import show_events
 
-VERSION = "2.5.0"
+VERSION = "2.6.0"
 
 
 def main():
@@ -29,19 +28,17 @@ def main():
     events = db.load_events()
     print(f"Events loaded: {len(events)}")
 
-    # Generate schedule
-    engine = ScheduleEngine()
-    runtimes = engine.generate(events)
-    print(f"RunTimes generated: {len(runtimes)}")
+    # Create controller
+    controller = SchedulerController(events)
 
-    # Analyze schedule
-    analyzer = Analyzer(runtimes)
-    runtimes = analyzer.analyze()
+    # Generate current week
+    runtimes = controller.refresh()
+    print(f"RunTimes generated: {len(runtimes)}")
 
     print("Schedule analysis completed.")
 
     # Start GUI
-    show_events(runtimes)
+    show_events(controller, runtimes)
 
 
 if __name__ == "__main__":
