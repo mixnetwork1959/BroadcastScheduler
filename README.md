@@ -11,6 +11,14 @@ events, and inspect the complete weekly schedule before going on air.
 
 ------------------------------------------------------------------------
 
+## 📚 Documentation
+
+- 📘 [Installation Guide](INSTALL.md)
+- 📖 [User Guide](USER_GUIDE.md)
+- ❓ [Frequently Asked Questions](FAQ.md)
+
+------------------------------------------------------------------------
+
 # ✨ Features
 
 -   ✅ Native Windows desktop application
