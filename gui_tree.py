@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 1.1.0
+# Version 3.0.0
 # gui_tree.py
 # ==========================================
 
@@ -109,11 +109,19 @@ def populate_tree(
             False
         )
 
-        status = (
-            "⚠ Please Check"
-            if conflict
-            else "✓ OK"
-        )
+        if conflict:
+
+            count = getattr(
+                rt,
+                "conflict_count",
+                2
+            )
+
+            status = f"⚠ {count} events"
+
+        else:
+
+            status = "✓ OK"
 
         tags = (
             ("conflict",)

@@ -1,11 +1,11 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 2.7.0
+# Version 3.0.0
 # gui_calendar.py
 # ==========================================
 
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 
 LEFT = 70
@@ -23,6 +23,67 @@ DAYS = (
     "Sat",
     "Sun"
 )
+
+
+
+
+# =====================================================
+# RadioBOSS Color Conversion
+# =====================================================
+
+def radioboss_color_to_hex(
+    value,
+    fallback="#EEEEEE"
+):
+    """
+    Wandelt einen RadioBOSS-/Windows-COLORREF-Wert in #RRGGBB um.
+
+    COLORREF speichert Farben als 0x00BBGGRR.
+    """
+
+    try:
+        color_value = int(
+            str(value).strip()
+        )
+    except (TypeError, ValueError):
+        return fallback
+
+    # -1 bedeutet in RadioBOSS/Windows häufig:
+    # keine feste Farbe bzw. Standardfarbe.
+    if color_value < 0:
+        return fallback
+
+    red = color_value & 0xFF
+    green = (color_value >> 8) & 0xFF
+    blue = (color_value >> 16) & 0xFF
+
+    return f"#{red:02X}{green:02X}{blue:02X}"
+
+
+def get_contrast_text_color(
+    background
+):
+    """
+    Liefert Schwarz oder Weiß passend zur Hintergrundfarbe.
+    """
+
+    try:
+        red = int(background[1:3], 16)
+        green = int(background[3:5], 16)
+        blue = int(background[5:7], 16)
+    except (TypeError, ValueError, IndexError):
+        return "#000000"
+
+    brightness = (
+        (red * 299) +
+        (green * 587) +
+        (blue * 114)
+    ) / 1000
+
+    if brightness >= 140:
+        return "#000000"
+
+    return "#FFFFFF"
 
 
 # =====================================================
@@ -169,6 +230,85 @@ def draw_day_lines(
             total_height,
             fill="#CFCFCF"
         )
+
+
+# =====================================================
+# Show Event Details
+# =====================================================
+
+def show_event_details(rt):
+
+    event_name = getattr(
+        rt.event,
+        "name",
+        "Unknown"
+    )
+
+    group = getattr(
+        rt.event,
+        "group",
+        ""
+    )
+
+    event_id = getattr(
+        rt.event,
+        "id",
+        ""
+    )
+
+    back_color = getattr(
+        rt.event,
+        "back_color",
+        ""
+    )
+
+    font_color = getattr(
+        rt.event,
+        "font_color",
+        ""
+    )
+
+    start_text = (
+        rt.start.strftime("%A, %d.%m.%Y %H:%M:%S")
+        if getattr(rt, "start", None)
+        else "-"
+    )
+
+    end_value = getattr(
+        rt,
+        "end",
+        None
+    )
+
+    end_text = (
+        end_value.strftime("%A, %d.%m.%Y %H:%M:%S")
+        if end_value
+        else "-"
+    )
+
+    conflict = (
+        "Yes"
+        if getattr(rt, "conflict", False)
+        else "No"
+    )
+
+    details = (
+        f"Event: {event_name}\n"
+        f"ID: {event_id or '-'}\n"
+        f"Group: {group or '-'}\n\n"
+        f"Start: {start_text}\n"
+        f"End: {end_text}\n"
+        f"Conflict: {conflict}\n\n"
+        f"BackColor: {back_color or '-'}\n"
+        f"FontColor: {font_color or '-'}"
+    )
+
+    messagebox.showinfo(
+        "Event Details",
+        details
+    )
+
+
 # =====================================================
 # Draw Events
 # =====================================================
@@ -233,49 +373,41 @@ def draw_events(
 
         for rt in events:
 
-            group = rt.event.group.lower()
+            color = radioboss_color_to_hex(
+                getattr(
+                    rt.event,
+                    "back_color",
+                    ""
+                ),
+                fallback="#EEEEEE"
+            )
+
+            font_color_value = getattr(
+                rt.event,
+                "font_color",
+                ""
+            )
+
+            font_color = radioboss_color_to_hex(
+                font_color_value,
+                fallback=get_contrast_text_color(
+                    color
+                )
+            )
 
             if getattr(rt, "conflict", False):
 
-                color = "#FFB3B3"
                 outline = "#B00020"
-                width = 2
-
-            elif "music" in group:
-
-                color = "#B7D7F7"
-                outline = "#B8B8B8"
-                width = 1
-
-            elif "jingle" in group:
-
-                color = "#BFE8BF"
-                outline = "#B8B8B8"
-                width = 1
-
-            elif "news" in group:
-
-                color = "#FFD699"
-                outline = "#B8B8B8"
-                width = 1
-
-            elif "update" in group:
-
-                color = "#FFF2A8"
-                outline = "#B8B8B8"
-                width = 1
-
-            elif "moderation" in group:
-
-                color = "#E6CCFF"
-                outline = "#B8B8B8"
-                width = 1
+                width = 3
 
             else:
 
-                color = "#EEEEEE"
                 outline = "#B8B8B8"
                 width = 1
+
+            event_tag = (
+                f"event_{day}_{hour}_{visible_events}"
+            )
 
             canvas.create_rectangle(
                 x + 4,
@@ -284,7 +416,8 @@ def draw_events(
                 yy + 18,
                 fill=color,
                 outline=outline,
-                width=width
+                width=width,
+                tags=(event_tag,)
             )
 
             canvas.create_text(
@@ -292,7 +425,33 @@ def draw_events(
                 yy + 9,
                 anchor="w",
                 text=f"{rt.start:%H:%M}  {rt.event.name}",
-                font=("Segoe UI", 10)
+                font=("Segoe UI", 10),
+                fill=font_color,
+                tags=(event_tag,)
+            )
+
+            canvas.tag_bind(
+                event_tag,
+                "<Double-Button-1>",
+                lambda event, runtime=rt: show_event_details(
+                    runtime
+                )
+            )
+
+            canvas.tag_bind(
+                event_tag,
+                "<Enter>",
+                lambda event: canvas.configure(
+                    cursor="hand2"
+                )
+            )
+
+            canvas.tag_bind(
+                event_tag,
+                "<Leave>",
+                lambda event: canvas.configure(
+                    cursor=""
+                )
             )
 
             yy += 24

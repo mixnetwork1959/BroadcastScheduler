@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 2.7.0
+# Version 3.0.0
 # gui_toolbar.py
 # ==========================================
 
@@ -61,21 +61,10 @@ def create_toolbar(root):
         padx=2
     )
 
-    btn_month = ttk.Button(
-        toolbar,
-        text="Month"
-    )
-
-    btn_month.pack(
-        side="left",
-        padx=2
-    )
-
     return (
         toolbar,
         btn_refresh,
         btn_prev,
         btn_today,
         btn_next,
-        btn_month
     )

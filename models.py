@@ -1,15 +1,12 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 2.0.2
+# Version 3.0.0
 # models.py
-#
-# Änderungen:
-# - minutes von int -> str geändert
-# - seconds bleibt int
 # ==========================================
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
+from typing import Dict
 
 
 # ==========================================
@@ -49,6 +46,19 @@ class Event:
     repeat_period: int
     repeat_count: int
     repeat_limit: int
+
+    # RadioBOSS-Darstellung
+    back_color: str = ""
+    font_color: str = ""
+
+    # Weitere SDL-Informationen
+    priority: int = 0
+    description: str = ""
+
+    # Vollständiger Originaldatensatz aus der SDL-Datei
+    raw_data: Dict[str, str] = field(
+        default_factory=dict
+    )
 
 
 # ==========================================

@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 2.7.0
+# Version 3.0.0
 # gui_menu.py
 # ==========================================
 
@@ -11,7 +11,7 @@ import tkinter as tk
 # Create Menu
 # =====================================================
 
-def create_menu(root):
+def create_menu(root, refresh_command):
 
     menubar = tk.Menu(root)
 
@@ -21,7 +21,8 @@ def create_menu(root):
     )
 
     file_menu.add_command(
-        label="Refresh"
+    label="Refresh",
+    command=refresh_command
     )
 
     file_menu.add_separator()

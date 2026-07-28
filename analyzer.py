@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 1.1.0
+# Version 3.0.0
 # analyzer.py
 #
 # Schedule Analyzer
