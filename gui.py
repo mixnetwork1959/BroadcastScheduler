@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 3.0.0
+# Version 4.2.0
 # gui.py
 # ==========================================
 
@@ -31,6 +31,9 @@ from gui_calendar import (
     create_calendar,
     draw_calendar
 )
+from gui_public_calendar import (
+    PublicCalendarTab
+)
 
 
 # =====================================================
@@ -41,7 +44,7 @@ def show_events(controller, runtimes):
 
     root = tk.Tk()
 
-    root.title("Broadcast Scheduler 2.7.0")
+    root.title("Broadcast Scheduler 4.2.0")
     root.geometry("1600x900")
 
     # =====================================================
@@ -103,6 +106,18 @@ def show_events(controller, runtimes):
         text="Calendar"
     )
 
+
+    # =====================================================
+    # Public Calendar Tab
+    # =====================================================
+
+    public_calendar_tab = ttk.Frame(notebook)
+
+    notebook.add(
+        public_calendar_tab,
+        text="Public Calendar"
+    )
+
     # =====================================================
     # Calendar
     # =====================================================
@@ -125,6 +140,17 @@ def show_events(controller, runtimes):
         vsb,
         hsb
     ) = create_treeview(events_tab)
+
+
+    # =====================================================
+    # Public Calendar
+    # =====================================================
+
+    public_calendar = PublicCalendarTab(
+        public_calendar_tab,
+        controller.events,
+        runtimes
+    )
 
     # Sortierung aktivieren
 

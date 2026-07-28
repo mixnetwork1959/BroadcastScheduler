@@ -1,230 +1,133 @@
 # 📅 Broadcast Scheduler for RadioBOSS
 
-![Version](https://img.shields.io/badge/version-3.0.0-green)
+![Version](https://img.shields.io/badge/version-4.2.0-blue)
 
-Broadcast Scheduler is a desktop analysis tool for **RadioBOSS**.
+> **A free open source companion tool for RadioBOSS.**
+>
+> Analyze your scheduler, detect conflicts and generate a beautiful public program schedule for your website.
 
-It reads the original **Admin.sdl** file and provides a clear visual
-overview of your weekly broadcast schedule. The application helps
-administrators verify scheduler configurations, review simultaneous
-events, and inspect the complete weekly schedule before going on air.
+Broadcast Scheduler is an open source desktop application for **RadioBOSS**.
 
-------------------------------------------------------------------------
+It helps radio stations analyze, verify and publish their broadcast schedules.
+
+Besides a powerful Schedule Analyzer, Broadcast Scheduler now includes a **Public Calendar Website Generator** that creates a modern weekly program schedule for your station website with a single click.
+
+---
 
 ## 📚 Documentation
 
-- 📘 [Installation Guide](INSTALL.md)
-- 📖 [User Guide](USER_GUIDE.md)
-- ❓ [Frequently Asked Questions](FAQ.md)
+- 📘 Installation Guide (`INSTALL.md`)
+- 📖 User Guide (`USER_GUIDE.md`)
+- 📜 Changelog (`CHANGELOG.md`)
 
-------------------------------------------------------------------------
+---
 
 # ✨ Features
 
--   ✅ Native Windows desktop application
--   ✅ Weekly calendar view
--   ✅ Event list
--   ✅ Original RadioBOSS event colors
--   ✅ Automatic simultaneous event detection
--   ✅ Event details (double click)
--   ✅ Search
--   ✅ Group filter
--   ✅ Show only simultaneous events
--   ✅ Previous / Today / Next Week navigation
--   ✅ Automatic scroll to current time
--   ✅ Status bar
--   ✅ Modular architecture
+## 📅 Schedule Analyzer
 
-------------------------------------------------------------------------
+- Weekly schedule overview
+- Monthly preview
+- Conflict detection
+- Search and filters
+- Group filter
+- Event details
+- Status bar
+- Modular architecture
+
+## 🌍 Public Calendar
+
+- Public program editor
+- Custom public names
+- Program descriptions
+- Custom colors
+- Enable / disable programs
+- Live preview
+
+## 🌐 Website Generator
+
+- Publish Website button
+- Standalone HTML output
+- Responsive layout
+- Live "Now Playing"
+- Current time indicator
+- Live progress bar
+- No local web server required
+
+---
 
 # 🖥 Screenshots
 
-## Start View
+## Schedule Analyzer
 
-![Start View](images/screenshot_01_start_view.PNG)
+![Analyzer](images/screenshot_02_calendar_view.PNG)
 
-## Weekly Calendar
+## Public Calendar Editor
 
-![Weekly Calendar](images/screenshot_02_calendar_view.PNG)
+![Public Calendar Editor](images/public_calendar_editor.PNG)
 
-## Simultaneous Events
+## Generated Website
 
-![Simultaneous Events](images/screenshot_03_possible_conflicts.PNG)
+![Public Calendar Website](images/public_calendar_html.PNG)
 
-------------------------------------------------------------------------
+---
 
-# 📂 Project Structure
+# 🌍 Public Calendar
 
-``` text
-BroadcastScheduler
-│
-├── analyzer.py
-├── config.py
-├── database.py
-├── gui.py
-├── gui_calendar.py
-├── gui_filter.py
-├── gui_menu.py
-├── gui_statusbar.py
-├── gui_toolbar.py
-├── gui_tree.py
-├── gui_treeview.py
-├── models.py
-├── parser.py
-├── schedule_engine.py
-├── scheduler.py
-├── scheduler_controller.py
-├── settings.example.json
-├── README.md
-└── LICENSE
+Choose which music programs should appear on your website.
+
+For every program you can define:
+
+- Public name
+- Description
+- Color
+- Visibility
+
+The generated website is completely standalone and can be uploaded directly to any web server.
+
+---
+
+# 🌐 Website Generator
+
+Click **Publish Website** to generate:
+
+```text
+website_output/index.html
 ```
 
-------------------------------------------------------------------------
+The generated website includes:
 
-# ⚠ Simultaneous Event Detection
+- Weekly schedule
+- Live Now Playing
+- Current time line
+- Progress bar
+- Responsive layout
 
-Broadcast Scheduler detects events that are scheduled to start at
-exactly the same time.
+No local web server is required.
 
-These events are highlighted in:
-
--   the Event List
--   the Weekly Calendar
-
-A simultaneous start is **not automatically an error**. It simply
-indicates that multiple scheduler events begin at the same scheduled
-time and should be reviewed by the administrator.
-
-------------------------------------------------------------------------
-
-# 🎨 Calendar Colors
-
-The calendar uses the original **RadioBOSS event colors** stored in the
-`Admin.sdl` file.
-
-This means the scheduler automatically reflects the colors configured
-inside RadioBOSS.
-
-------------------------------------------------------------------------
-
-# ⚙ Requirements
-
--   Windows 10 / Windows 11
--   Python 3.12 or newer
--   RadioBOSS
--   Tkinter (included with Python)
-
-------------------------------------------------------------------------
-
-# 🚀 Installation
-
-Clone the repository:
-
-``` bash
-git clone https://github.com/mixnetwork1959/BroadcastScheduler.git
-```
-
-Open the project folder:
-
-``` bash
-cd BroadcastScheduler
-```
-
-Copy:
-
-``` text
-settings.example.json
-```
-
-to:
-
-``` text
-settings.json
-```
-
-Edit the file:
-
-``` json
-{
-  "admin_sdl": "C:/Users/USERNAME/AppData/Roaming/djsoft.net/RadioBOSS_xxxxxxxxx/Presets/Schedule/Admin.sdl"
-}
-```
-
-Start the application:
-
-``` bash
-py scheduler.py
-```
-
-------------------------------------------------------------------------
-
-# 📅 Supported RadioBOSS Features
-
-Current support:
-
--   Days
--   Hours
--   Minutes
--   Seconds
--   TimeType 1
--   Multiple minutes per hour
--   Original RadioBOSS colors
-
-Support for additional RadioBOSS scheduling features will be added in
-future releases.
-
-------------------------------------------------------------------------
-
-# 🎯 Project Goal
-
-Broadcast Scheduler is **not intended to replace RadioBOSS**.
-
-Its purpose is to provide administrators with a fast visual overview of
-their scheduler configuration.
-
-Typical questions it helps answer are:
-
--   Which events are scheduled this week?
--   Are multiple events starting at the same time?
--   Is the weekly schedule complete?
--   Are all events enabled?
--   Does the schedule look as expected before going live?
-
-The application intentionally focuses on **schedule verification**, not
-on simulating the RadioBOSS playout engine.
-
-------------------------------------------------------------------------
+---
 
 # 🚧 Roadmap
 
-## Version 3.1
+## Version 5.0
 
--   Improved analyzer
--   Additional RadioBOSS TimeTypes
--   Better event information
--   Performance improvements
+- Broadcast Scheduler Suite
+- Statistics
+- Website Publisher
+- FTP Upload
+- Themes
+- Multi-language support
 
-------------------------------------------------------------------------
-
-# 🤝 Contributing
-
-Bug reports, feature requests and pull requests are always welcome.
-
-------------------------------------------------------------------------
+---
 
 # 📜 License
 
-This project is licensed under the **MIT License**.
+MIT License
 
-------------------------------------------------------------------------
+---
 
 # 👤 Author
 
 **Raymond Ummels**
 
 Developed with the assistance of ChatGPT.
-
-------------------------------------------------------------------------
-
-⭐ If you find this project useful, please consider giving it a **Star**
-on GitHub.

@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "programs": [
+    {
+      "event_id": "AGVFIXMEUYDTTGIURMEE",
+      "public_name": "01 Morning (06-10)",
+      "description": "",
+      "color": "#FF8040",
+      "enabled": true
+    },
+    {
+      "event_id": "OXPFMNLYGVALKEOGYUKE",
+      "public_name": "02 Day (10-15) Mo-Freit.",
+      "description": "",
+      "color": "#4EA3FF",
+      "enabled": true
+    },
+    {
+      "event_id": "XFGRRGDHICKCWOSIDQRL",
+      "public_name": "03 Afternoon y (16-18) Mo-Freit.",
+      "description": "",
+      "color": "#00FF80",
+      "enabled": true
+    },
+    {
+      "event_id": "JPVBJTRCCFUURJUTFEGI",
+      "public_name": "03 Time+Jingle",
+      "description": "",
+      "color": "#FFFF80",
+      "enabled": true
+    },
+    {
+      "event_id": "DLQFTUGEEJHWBCWHMCBY",
+      "public_name": "04 Evening Mix (19-22)",
+      "description": "",
+      "color": "#4EA3FF",
+      "enabled": true
+    },
+    {
+      "event_id": "SIHAQGYKWGWGTCHUFTOH",
+      "public_name": "05 Night (22-06)",
+      "description": "",
+      "color": "#C0C0C0",
+      "enabled": true
+    }
+  ]
+}
