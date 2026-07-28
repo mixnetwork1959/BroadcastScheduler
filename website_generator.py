@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.2.0
+# Version 4.3.1
 # website_generator.py
 # ==========================================
 
@@ -9,6 +9,7 @@ from __future__ import annotations
 import html
 import json
 import webbrowser
+from datetime import timedelta
 from pathlib import Path
 
 from config import load_settings
@@ -41,10 +42,16 @@ class PublicCalendarWebsiteGenerator:
         events = Database(settings).load_events()
         runtimes = SchedulerController(events).refresh()
 
-        public_config = PublicCalendarConfig(self.config_filename)
+        public_config = PublicCalendarConfig(
+            self.config_filename
+        )
         public_config.load()
 
-        blocks = PublicCalendarEngine().detect(runtimes, public_config)
+        blocks = PublicCalendarEngine().detect(
+            runtimes,
+            public_config
+        )
+
         programs = []
 
         for block in blocks:
@@ -52,41 +59,124 @@ class PublicCalendarWebsiteGenerator:
                 (block.end - block.start).total_seconds() // 60
             )
 
-            # Exclude invalid and artificial nearly-all-day technical blocks.
-            if duration_minutes <= 0 or duration_minutes >= 18 * 60:
+            # Exclude invalid and artificial nearly-all-day
+            # technical blocks.
+            if (
+                duration_minutes <= 0
+                or duration_minutes >= 18 * 60
+            ):
                 continue
 
-            programs.append({
+            common_data = {
                 "event_id": block.event_id,
                 "title": block.public_name,
                 "description": block.description,
                 "color": block.color,
-                "start": block.start.isoformat(),
-                "end": block.end.isoformat(),
-                "day": block.start.strftime("%A"),
-                "start_time": block.start.strftime("%H:%M"),
-                "end_time": block.end.strftime("%H:%M"),
-            })
+            }
+
+            # Normal block: starts and ends on the same day.
+            if block.end.date() == block.start.date():
+                programs.append(
+                    {
+                        **common_data,
+                        "start": block.start.isoformat(),
+                        "end": block.end.isoformat(),
+                        "day": block.start.strftime("%A"),
+                        "start_time": block.start.strftime("%H:%M"),
+                        "end_time": block.end.strftime("%H:%M"),
+                    }
+                )
+                continue
+
+            # Overnight block: split at midnight so it appears in
+            # both day columns of the weekly calendar.
+            midnight = (
+                block.start.replace(
+                    hour=0,
+                    minute=0,
+                    second=0,
+                    microsecond=0,
+                )
+                + timedelta(days=1)
+            )
+
+            # First part: start day until 24:00.
+            programs.append(
+                {
+                    **common_data,
+                    "start": block.start.isoformat(),
+                    "end": midnight.isoformat(),
+                    "day": block.start.strftime("%A"),
+                    "start_time": block.start.strftime("%H:%M"),
+                    "end_time": "24:00",
+                }
+            )
+
+            # Second part: next day from 00:00 until the actual end.
+            programs.append(
+                {
+                    **common_data,
+                    "start": midnight.isoformat(),
+                    "end": block.end.isoformat(),
+                    "day": block.end.strftime("%A"),
+                    "start_time": "00:00",
+                    "end_time": block.end.strftime("%H:%M"),
+                }
+            )
 
         week_label = "No programs selected"
-        if blocks:
-            start = min(block.start for block in blocks)
-            end = max(block.end for block in blocks)
-            week_label = (
-                f"{start.strftime('%b')} {start.day} – "
-                f"{end.strftime('%b')} {end.day}, {end.year}"
-            )
+
+        if programs:
+            visible_starts = [
+                block.start
+                for block in blocks
+                if int(
+                    (block.end - block.start).total_seconds() // 60
+                ) > 0
+                and int(
+                    (block.end - block.start).total_seconds() // 60
+                ) < 18 * 60
+            ]
+
+            visible_ends = [
+                block.end
+                for block in blocks
+                if int(
+                    (block.end - block.start).total_seconds() // 60
+                ) > 0
+                and int(
+                    (block.end - block.start).total_seconds() // 60
+                ) < 18 * 60
+            ]
+
+            if visible_starts and visible_ends:
+                start = min(visible_starts)
+                end = max(visible_ends)
+
+                week_label = (
+                    f"{start.strftime('%b')} {start.day} – "
+                    f"{end.strftime('%b')} {end.day}, {end.year}"
+                )
 
         document = self._document(
             programs=programs,
             week_label=week_label,
         )
 
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        OUTPUT_FILE.write_text(document, encoding="utf-8")
+        OUTPUT_DIR.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        OUTPUT_FILE.write_text(
+            document,
+            encoding="utf-8"
+        )
 
         if open_browser:
-            webbrowser.open(OUTPUT_FILE.resolve().as_uri())
+            webbrowser.open(
+                OUTPUT_FILE.resolve().as_uri()
+            )
 
         return OUTPUT_FILE
 

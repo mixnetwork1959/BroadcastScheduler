@@ -1,5 +1,5 @@
 # 📅 Broadcast Scheduler for RadioBOSS
-
+4.3.1
 ![Version](https://img.shields.io/badge/version-4.2.0-blue)
 
 > **A free open source companion tool for RadioBOSS.**

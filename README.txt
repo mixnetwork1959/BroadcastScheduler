@@ -1,4 +1,4 @@
-Broadcast Scheduler 4.2.0 – Public Calendar
+Broadcast Scheduler 4.3.1 – Public Calendar
 
 Included files:
 - gui.py

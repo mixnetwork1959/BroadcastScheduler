@@ -1,5 +1,5 @@
 # 📘 Broadcast Scheduler Installation Guide
-
+4.3.1
 ## Requirements
 
 - Windows 10 / Windows 11
