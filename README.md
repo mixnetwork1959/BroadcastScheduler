@@ -1,77 +1,56 @@
 # 📅 Broadcast Scheduler for RadioBOSS
-![Version](https://img.shields.io/badge/version-2.7.0--alpha1-blue)
 
-Broadcast Scheduler is an analysis and planning tool for **RadioBOSS**.
+![Version](https://img.shields.io/badge/version-3.0.0-green)
 
-The application reads the original **Admin.sdl** file created by RadioBOSS and generates a clear weekly or monthly schedule. This makes it easy to review broadcast schedules, identify programming issues, and verify schedule configurations.
+Broadcast Scheduler is a desktop analysis tool for **RadioBOSS**.
 
-## Highlights
+It reads the original **Admin.sdl** file and provides a clear visual
+overview of your weekly broadcast schedule. The application helps
+administrators verify scheduler configurations, review simultaneous
+events, and inspect the complete weekly schedule before going on air.
 
-- Clean modular architecture
-- Weekly schedule visualization
-- Automatic conflict detection
-- Fast RadioBOSS schedule analysis
-- Open source (MIT License)
----
+------------------------------------------------------------------------
+
+# ✨ Features
+
+-   ✅ Native Windows desktop application
+-   ✅ Weekly calendar view
+-   ✅ Event list
+-   ✅ Original RadioBOSS event colors
+-   ✅ Automatic simultaneous event detection
+-   ✅ Event details (double click)
+-   ✅ Search
+-   ✅ Group filter
+-   ✅ Show only simultaneous events
+-   ✅ Previous / Today / Next Week navigation
+-   ✅ Automatic scroll to current time
+-   ✅ Status bar
+-   ✅ Modular architecture
+
+------------------------------------------------------------------------
 
 # 🖥 Screenshots
 
 ## Start View
+
 ![Start View](images/screenshot_01_start_view.PNG)
 
 ## Weekly Calendar
+
 ![Weekly Calendar](images/screenshot_02_calendar_view.PNG)
 
-## Possible Conflicts
-![Possible Conflicts](images/screenshot_03_possible_conflicts.PNG)
+## Simultaneous Events
 
----
+![Simultaneous Events](images/screenshot_03_possible_conflicts.PNG)
 
-# ✨ Features
-- ✅ Modular GUI architecture
-- ✅ Weekly calendar
-- ✅ Event list
-- ✅ Status bar
-- ✅ Search and filters
-
-## Currently Available
-
-- ✅ Read and parse `Admin.sdl`
-- ✅ Weekly calendar view
-- ✅ Event list
-- ✅ Conflict detection
-- ✅ Conflict highlighting
-- ✅ Search
-- ✅ Group filter
-- ✅ Show only conflicts
-- ✅ Previous / Today / Next Week navigation
-- ✅ Monthly view (preview)
-- ✅ Status bar
-- ✅ Vertical and horizontal scrolling
-- ✅ Support for multiple minutes per hour (e.g. `17,43`)
-- ✅ Support for `TimeType = 1`
-
----
-
-# 🚧 Roadmap
-
-## Version 2.7.0-alpha1
-
-- ✅ Complete GUI refactoring
-- ✅ Modular architecture
-- ✅ TreeView module
-- ✅ Calendar module
-- ✅ Filter module
-- ✅ Toolbar module
-- ✅ Statusbar module
----
+------------------------------------------------------------------------
 
 # 📂 Project Structure
 
+``` text
 BroadcastScheduler
 │
 ├── analyzer.py
-├── checker.py
 ├── config.py
 ├── database.py
 ├── gui.py
@@ -91,143 +70,145 @@ BroadcastScheduler
 ├── README.md
 └── LICENSE
 ```
-# ⚠ Conflict Detection
 
-Broadcast Scheduler automatically detects events that start at exactly the same time.
+------------------------------------------------------------------------
 
-Conflicts are displayed
+# ⚠ Simultaneous Event Detection
 
-- in the Event List
-- in the Weekly Calendar
+Broadcast Scheduler detects events that are scheduled to start at
+exactly the same time.
 
-A conflict does not necessarily mean that the schedule is incorrect.
+These events are highlighted in:
 
-It simply indicates that two or more events start simultaneously and should be reviewed.
----
+-   the Event List
+-   the Weekly Calendar
+
+A simultaneous start is **not automatically an error**. It simply
+indicates that multiple scheduler events begin at the same scheduled
+time and should be reviewed by the administrator.
+
+------------------------------------------------------------------------
+
 # 🎨 Calendar Colors
 
-Blue
-Music
+The calendar uses the original **RadioBOSS event colors** stored in the
+`Admin.sdl` file.
 
-Green
-Jingles
+This means the scheduler automatically reflects the colors configured
+inside RadioBOSS.
 
-Yellow
-Updates
-
-Purple
-Moderation
-
-Red
-Conflict detected
-
+------------------------------------------------------------------------
 
 # ⚙ Requirements
 
-- Windows 10 / Windows 11
-Python 3.12 or newer
-- RadioBOSS
-- Tkinter (included with Python)
+-   Windows 10 / Windows 11
+-   Python 3.12 or newer
+-   RadioBOSS
+-   Tkinter (included with Python)
 
-
-# Known Limitations
-
-Currently supported:
-
-- TimeType 1
-
-Planned:
-
-- Additional RadioBOSS scheduling options
-- Advanced Repeat Rules
----
+------------------------------------------------------------------------
 
 # 🚀 Installation
 
 Clone the repository:
 
-```bash
+``` bash
 git clone https://github.com/mixnetwork1959/BroadcastScheduler.git
 ```
 
 Open the project folder:
 
-```bash
+``` bash
 cd BroadcastScheduler
 ```
 
-Copy
+Copy:
 
-```text
+``` text
 settings.example.json
 ```
 
-to
+to:
 
-```text
+``` text
 settings.json
 ```
 
-Then edit the file and enter the path to your own **Admin.sdl** file.
+Edit the file:
 
-Example:
-
-```json
+``` json
 {
-    "admin_sdl": "C:/Users/USERNAME/AppData/Roaming/djsoft.net/RadioBOSS_xxxxxxxxx/Presets/Schedule/Admin.sdl"
+  "admin_sdl": "C:/Users/USERNAME/AppData/Roaming/djsoft.net/RadioBOSS_xxxxxxxxx/Presets/Schedule/Admin.sdl"
 }
 ```
 
 Start the application:
 
-```bash
+``` bash
 py scheduler.py
 ```
 
----
+------------------------------------------------------------------------
 
 # 📅 Supported RadioBOSS Features
 
-The scheduler currently supports:
+Current support:
 
-- Days
-- Hours
-- Minutes
-- Seconds
-- TimeType 1
+-   Days
+-   Hours
+-   Minutes
+-   Seconds
+-   TimeType 1
+-   Multiple minutes per hour
+-   Original RadioBOSS colors
 
-Support for additional RadioBOSS features will be added in future releases.
+Support for additional RadioBOSS scheduling features will be added in
+future releases.
 
----
+------------------------------------------------------------------------
 
 # 🎯 Project Goal
 
 Broadcast Scheduler is **not intended to replace RadioBOSS**.
 
-Its purpose is to provide a fast and convenient way to analyze your broadcast schedule and answer questions such as:
+Its purpose is to provide administrators with a fast visual overview of
+their scheduler configuration.
 
-- Which events are scheduled for this week?
-- Are there any scheduling gaps?
-- Are there overlapping events?
-- Are moderator events scheduled correctly?
-- Are news events configured correctly?
-- Is the broadcast schedule working as intended?
+Typical questions it helps answer are:
 
----
+-   Which events are scheduled this week?
+-   Are multiple events starting at the same time?
+-   Is the weekly schedule complete?
+-   Are all events enabled?
+-   Does the schedule look as expected before going live?
+
+The application intentionally focuses on **schedule verification**, not
+on simulating the RadioBOSS playout engine.
+
+------------------------------------------------------------------------
+
+# 🚧 Roadmap
+
+## Version 3.1
+
+-   Improved analyzer
+-   Additional RadioBOSS TimeTypes
+-   Better event information
+-   Performance improvements
+
+------------------------------------------------------------------------
 
 # 🤝 Contributing
 
-Bug reports, feature requests, and pull requests are always welcome.
+Bug reports, feature requests and pull requests are always welcome.
 
----
+------------------------------------------------------------------------
 
 # 📜 License
 
 This project is licensed under the **MIT License**.
 
-For more information, see the **LICENSE** file.
-
----
+------------------------------------------------------------------------
 
 # 👤 Author
 
@@ -235,6 +216,7 @@ For more information, see the **LICENSE** file.
 
 Developed with the assistance of ChatGPT.
 
----
+------------------------------------------------------------------------
 
-⭐ If you find this project useful, please consider giving it a **Star** on GitHub.
+⭐ If you find this project useful, please consider giving it a **Star**
+on GitHub.
