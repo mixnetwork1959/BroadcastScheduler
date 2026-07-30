@@ -13,11 +13,16 @@ SETTINGS_FILE = "settings.json"
 def load_settings():
     if not os.path.exists(SETTINGS_FILE):
         return {
-            "admin_sdl": ""
+            "admin_sdl": "",
+            "theme": "radio_albena"
         }
 
     with open(SETTINGS_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+        settings = json.load(f)
+
+    settings.setdefault("theme", "radio_albena")
+
+    return settings
 
 
 def save_settings(settings):

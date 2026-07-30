@@ -1,10 +1,9 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 3.0.0
+# Version 4.4.0
 # gui_treeview.py
 # ==========================================
 
-import tkinter as tk
 from tkinter import ttk
 
 
@@ -40,18 +39,16 @@ def create_treeview(parent):
     # Scrollbars
     # -------------------------------------------------
 
-    vsb = tk.Scrollbar(
+    vsb = ttk.Scrollbar(
         frame,
         orient="vertical",
-        command=tree.yview,
-        width=20
+        command=tree.yview
     )
 
-    hsb = tk.Scrollbar(
+    hsb = ttk.Scrollbar(
         frame,
         orient="horizontal",
-        command=tree.xview,
-        width=20
+        command=tree.xview
     )
 
     tree.configure(
@@ -65,7 +62,7 @@ def create_treeview(parent):
 
     tree.tag_configure(
         "conflict",
-        background="#FFF4CC"
+        background="#6A451D"
     )
 
     # -------------------------------------------------

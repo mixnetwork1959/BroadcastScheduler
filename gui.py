@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.2.0
+# Version 4.4.0
 # gui.py
 # ==========================================
 
@@ -34,18 +34,41 @@ from gui_calendar import (
 from gui_public_calendar import (
     PublicCalendarTab
 )
+from config import save_settings
+from theme_manager import (
+    THEMES,
+    DEFAULT_THEME,
+    apply_theme
+)
 
 
 # =====================================================
 # Main Window
 # =====================================================
 
-def show_events(controller, runtimes):
+def show_events(controller, runtimes, settings):
 
     root = tk.Tk()
 
-    root.title("Broadcast Scheduler 4.2.0")
+    root.title("Broadcast Scheduler 4.4.0")
     root.geometry("1600x900")
+
+    theme_id = settings.get(
+        "theme",
+        DEFAULT_THEME
+    )
+
+    if theme_id not in THEMES:
+        theme_id = DEFAULT_THEME
+
+    theme_var = tk.StringVar(
+        value=theme_id
+    )
+
+    current_theme = apply_theme(
+        root,
+        theme_id
+    )
 
     # =====================================================
     # Toolbar
@@ -127,7 +150,10 @@ def show_events(controller, runtimes):
         calendar_canvas,
         calendar_vscroll,
         calendar_hscroll
-    ) = create_calendar(calendar_tab)
+    ) = create_calendar(
+        calendar_tab,
+        current_theme
+    )
 
     # =====================================================
     # TreeView
@@ -212,7 +238,8 @@ def show_events(controller, runtimes):
 
         draw_calendar(
             calendar_canvas,
-            runtimes
+            runtimes,
+            current_theme
         )
 
     def update_gui():
@@ -267,6 +294,36 @@ def show_events(controller, runtimes):
         notebook.select(calendar_tab)
         redraw_calendar()
 
+    def change_theme():
+
+        nonlocal current_theme
+
+        selected_theme = theme_var.get()
+
+        if selected_theme not in THEMES:
+            selected_theme = DEFAULT_THEME
+            theme_var.set(selected_theme)
+
+        current_theme = apply_theme(
+            root,
+            selected_theme
+        )
+
+        settings["theme"] = selected_theme
+        save_settings(settings)
+
+        tree.tag_configure(
+            "conflict",
+            background=current_theme["conflict_row"],
+            foreground=current_theme["text"]
+        )
+
+        public_calendar.apply_theme(
+            current_theme
+        )
+
+        redraw_calendar()
+
     # =====================================================
     # Connect Toolbar Buttons
     # =====================================================
@@ -287,17 +344,24 @@ def show_events(controller, runtimes):
         command=next_week
     )
 
-       # =====================================================
+    # =====================================================
     # Create and Connect Menu
     # =====================================================
-   
+
     (
         menubar,
-        file_menu
+        file_menu,
+        view_menu,
+        theme_menu
     ) = create_menu(
         root,
-        refresh_gui
+        refresh_gui,
+        theme_var,
+        change_theme,
+        THEMES
     )
+
+    change_theme()
 
     # =====================================================
     # Filter Events

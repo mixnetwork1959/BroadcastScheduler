@@ -1,4 +1,5 @@
 {
-    "admin_sdl": "C:/Users/USERNAME/AppData/Roaming/djsoft.net/RadioBOSS_xxxxxxxxx/Presets/Schedule/<YourProfileName>.sdl"
+    "admin_sdl": "C:/Users/USERNAME/AppData/Roaming/djsoft.net/RadioBOSS_xxxxxxxxx/Presets/Schedule/<YourProfileName>.sdl",
+    "theme": "radio_albena"
 }
 Note: YourProfileName.sdl is the RadioBOSS scheduler profile you want to analyze. The file is not always named Admin.sdl. It depends on the name of your RadioBOSS scheduler profile.

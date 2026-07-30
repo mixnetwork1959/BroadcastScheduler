@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.2.0
+# Version 4.4.0
 # gui_public_calendar.py
 # ==========================================
 
@@ -68,6 +68,28 @@ class PublicCalendarTab:
 
         self._build_gui()
         self._load_candidates()
+
+    def apply_theme(self, theme):
+        """
+        Apply the application theme to native Tk widgets.
+
+        The live website preview deliberately keeps its own dark
+        website design, because it represents the generated page.
+        """
+
+        self.canvas.configure(
+            bg=theme["background"]
+        )
+
+        self.description_text.configure(
+            bg=theme["input"],
+            fg=theme["text"],
+            insertbackground=theme["text"],
+            selectbackground=theme["selection"],
+            selectforeground=theme["text"],
+            highlightbackground=theme["border"],
+            highlightcolor=theme["accent"]
+        )
 
     # =================================================
     # Candidate Detection

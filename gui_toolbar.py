@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 3.0.0
+# Version 4.4.0
 # gui_toolbar.py
 # ==========================================
 
@@ -23,7 +23,8 @@ def create_toolbar(root):
 
     btn_refresh = ttk.Button(
         toolbar,
-        text="🔄 Refresh"
+        text="🔄 Refresh",
+        style="Accent.TButton"
     )
 
     btn_refresh.pack(

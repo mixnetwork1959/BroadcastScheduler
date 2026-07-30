@@ -1,8 +1,20 @@
 # 🗺️ Broadcast Scheduler Roadmap
-4.3.1
+4.4.0
 This roadmap shows the planned direction of the project.
 
 The order of features may change based on user feedback and RadioBOSS compatibility.
+
+---
+
+# Version 4.4.0
+
+## Theme System
+
+- ✅ Radio Albena
+- ✅ Midnight Studio
+- ✅ Coastal Light
+- ✅ Color Wave
+- ✅ Saved theme selection
 
 ---
 

@@ -1,5 +1,5 @@
 # USER_GUIDE.md
-4.3.1
+4.4.0
 # Broadcast Scheduler User Guide
 
 ## Purpose
@@ -50,3 +50,16 @@ A warning means two or more scheduler events start at the same scheduled
 time.
 
 This does **not** automatically indicate an error.
+
+## Themes
+
+Open **View > Theme** to choose one of the four application themes:
+
+- Radio Albena
+- Midnight Studio
+- Coastal Light
+- Color Wave
+
+The selected theme is saved automatically and restored the next time
+Broadcast Scheduler starts. RadioBOSS event colors in the weekly calendar
+are not changed by the application theme.

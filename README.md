@@ -1,6 +1,6 @@
 # 📅 Broadcast Scheduler for RadioBOSS
-4.3.1
-![Version](https://img.shields.io/badge/version-4.2.0-blue)
+4.4.0
+![Version](https://img.shields.io/badge/version-4.4.0-blue)
 
 > **A free open source companion tool for RadioBOSS.**
 >
@@ -53,6 +53,15 @@ Besides a powerful Schedule Analyzer, Broadcast Scheduler now includes a **Publi
 - Current time indicator
 - Live progress bar
 - No local web server required
+
+## 🎨 Theme System
+
+- Radio Albena (default)
+- Midnight Studio
+- Coastal Light
+- Color Wave
+- Theme choice is saved automatically
+- Original RadioBOSS event colors are preserved
 
 ---
 
@@ -114,8 +123,6 @@ No local web server is required.
 - Broadcast Scheduler Suite
 - Statistics
 - Website Publisher
-- FTP Upload
-- Themes
 - Multi-language support
 
 ---

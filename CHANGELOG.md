@@ -1,5 +1,34 @@
 # Changelog
 
+## Version 4.4.0
+
+### New
+
+- Theme system with four selectable designs
+- Radio Albena theme (default)
+- Midnight Studio dark theme
+- Coastal Light theme with subtle color nuances
+- Color Wave theme
+- Theme selection under `View > Theme`
+- Automatic saving and restoring of the selected theme
+
+### Improvements
+
+- Themed toolbar, filters, tabs, tables, scrollbars and status bar
+- Weekly calendar background and grid follow the selected theme
+- RadioBOSS event colors remain unchanged in every theme
+- Conflict highlighting adapts to the active theme
+
+---
+
+## Version 4.3.1
+
+### Fixed
+
+- Public calendar programs crossing midnight are displayed correctly
+
+---
+
 ## Version 4.2.0
 
 ### New

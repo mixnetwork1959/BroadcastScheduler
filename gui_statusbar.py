@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 3.0.0
+# Version 4.4.0
 # gui_statusbar.py
 # ==========================================
 
@@ -18,7 +18,8 @@ def create_statusbar(root):
         text="",
         anchor="w",
         relief="sunken",
-        padding=4
+        padding=4,
+        style="Status.TLabel"
     )
 
     status.pack(

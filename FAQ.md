@@ -1,5 +1,5 @@
 # ❓ Frequently Asked Questions (FAQ)
-4.3.1
+4.4.0
 # General
 
 ## What is Broadcast Scheduler?

@@ -1,4 +1,4 @@
-Broadcast Scheduler 4.3.1 – Public Calendar
+Broadcast Scheduler 4.4.0 – Theme System
 
 Included files:
 - gui.py
@@ -6,9 +6,21 @@ Included files:
 - website_generator.py
 
 Installation:
-1. Copy all three files into the BroadcastScheduler project folder.
-2. Replace the existing files.
-3. Start: py scheduler.py
+1. Copy BroadcastScheduler.exe into an empty folder.
+2. Start BroadcastScheduler.exe.
+3. Select the RadioBOSS scheduler .sdl file.
+
+The application creates settings.json automatically.
+
+Finding the RadioBOSS SDL file:
+1. Click the address bar in the file selection window.
+2. Enter: %APPDATA%\djsoft.net
+3. Press Enter.
+4. Open: RadioBOSS_...\Presets\Schedule
+5. Select your scheduler profile .sdl file.
+
+The AppData folder is hidden by Windows by default. Using
+%APPDATA%\djsoft.net opens the correct location directly.
 
 Usage:
 1. Select only public music programs.
@@ -18,7 +30,13 @@ Usage:
 Output:
 website_output/index.html
 
-New in 4.2.0:
+New in 4.4.0:
+- Four selectable application themes
+- Radio Albena is the default theme
+- Theme selection is saved automatically
+- RadioBOSS event colors remain unchanged
+
+Public Calendar features:
 - Week view only
 - Lower day list removed
 - Publish Website button

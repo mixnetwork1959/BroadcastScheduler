@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 3.0.0
+# Version 4.4.0
 # scheduler.py
 # ==========================================
 
@@ -9,7 +9,7 @@ from database import Database
 from scheduler_controller import SchedulerController
 from gui import show_events
 
-VERSION = "2.6.0"
+VERSION = "4.4.0"
 
 
 def main():
@@ -38,7 +38,11 @@ def main():
     print("Schedule analysis completed.")
 
     # Start GUI
-    show_events(controller, runtimes)
+    show_events(
+        controller,
+        runtimes,
+        settings
+    )
 
 
 if __name__ == "__main__":

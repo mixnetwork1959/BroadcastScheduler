@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 3.0.0
+# Version 4.4.0
 # gui_calendar.py
 # ==========================================
 
@@ -90,7 +90,7 @@ def get_contrast_text_color(
 # Create Calendar
 # =====================================================
 
-def create_calendar(parent):
+def create_calendar(parent, theme):
 
     frame = ttk.Frame(parent)
 
@@ -99,7 +99,7 @@ def create_calendar(parent):
         expand=True
     )
 
-    vscroll = tk.Scrollbar(
+    vscroll = ttk.Scrollbar(
         frame,
         orient="vertical"
     )
@@ -109,7 +109,7 @@ def create_calendar(parent):
         fill="y"
     )
 
-    hscroll = tk.Scrollbar(
+    hscroll = ttk.Scrollbar(
         frame,
         orient="horizontal"
     )
@@ -121,7 +121,7 @@ def create_calendar(parent):
 
     canvas = tk.Canvas(
         frame,
-        bg="white",
+        bg=theme["background"],
         highlightthickness=0,
         yscrollcommand=vscroll.set,
         xscrollcommand=hscroll.set
@@ -153,7 +153,8 @@ def create_calendar(parent):
 
 def draw_header(
     canvas,
-    total_width
+    total_width,
+    theme
 ):
 
     for index, day in enumerate(DAYS):
@@ -165,15 +166,16 @@ def draw_header(
             0,
             x + DAY_WIDTH,
             TOP,
-            fill="#ECECEC",
-            outline="#C5C5C5"
+            fill=theme["calendar_header"],
+            outline=theme["calendar_grid"]
         )
 
         canvas.create_text(
             x + DAY_WIDTH / 2,
             TOP / 2,
             text=day,
-            font=("Segoe UI", 12, "bold")
+            font=("Segoe UI", 12, "bold"),
+            fill=theme["text"]
         )
 # =====================================================
 # Draw Hours
@@ -181,7 +183,8 @@ def draw_header(
 
 def draw_hours(
     canvas,
-    total_width
+    total_width,
+    theme
 ):
 
     for hour in range(24):
@@ -192,7 +195,8 @@ def draw_hours(
             35,
             y + 10,
             text=f"{hour:02d}:00",
-            font=("Segoe UI", 10, "bold")
+            font=("Segoe UI", 10, "bold"),
+            fill=theme["text"]
         )
 
         canvas.create_line(
@@ -200,7 +204,7 @@ def draw_hours(
             y,
             total_width,
             y,
-            fill="#D9D9D9"
+            fill=theme["calendar_grid"]
         )
 
     canvas.create_line(
@@ -208,7 +212,7 @@ def draw_hours(
         TOP + (24 * HOUR_HEIGHT),
         total_width,
         TOP + (24 * HOUR_HEIGHT),
-        fill="#D9D9D9"
+        fill=theme["calendar_grid"]
     )
 # =====================================================
 # Draw Day Lines
@@ -216,7 +220,8 @@ def draw_hours(
 
 def draw_day_lines(
     canvas,
-    total_height
+    total_height,
+    theme
 ):
 
     for day in range(8):
@@ -228,7 +233,7 @@ def draw_day_lines(
             TOP,
             x,
             total_height,
-            fill="#CFCFCF"
+            fill=theme["calendar_grid"]
         )
 
 
@@ -315,7 +320,8 @@ def show_event_details(rt):
 
 def draw_events(
     canvas,
-    runtimes
+    runtimes,
+    theme
 ):
 
     if not runtimes:
@@ -355,8 +361,8 @@ def draw_events(
             y,
             x + DAY_WIDTH - 10,
             y + HOUR_HEIGHT - 10,
-            fill="#F8F8F8",
-            outline="#D0D0D0"
+            fill=theme["calendar_cell"],
+            outline=theme["calendar_grid"]
         )
 
         canvas.create_text(
@@ -364,7 +370,8 @@ def draw_events(
             y + 6,
             anchor="nw",
             text=f"{hour:02d}:00",
-            font=("Segoe UI", 12, "bold")
+            font=("Segoe UI", 12, "bold"),
+            fill=theme["text"]
         )
 
         yy = y + 28
@@ -397,12 +404,12 @@ def draw_events(
 
             if getattr(rt, "conflict", False):
 
-                outline = "#B00020"
+                outline = theme["danger"]
                 width = 3
 
             else:
 
-                outline = "#B8B8B8"
+                outline = theme["calendar_grid"]
                 width = 1
 
             event_tag = (
@@ -483,13 +490,15 @@ def draw_events(
 
 def draw_calendar(
     canvas,
-    runtimes
+    runtimes,
+    theme
 ):
     """
     Draw the weekly calendar.
     """
 
     canvas.delete("all")
+    canvas.configure(bg=theme["background"])
 
     total_width = LEFT + (len(DAYS) * DAY_WIDTH)
     total_height = TOP + (24 * HOUR_HEIGHT)
@@ -505,20 +514,24 @@ def draw_calendar(
 
     draw_header(
         canvas,
-        total_width
+        total_width,
+        theme
     )
 
     draw_hours(
         canvas,
-        total_width
+        total_width,
+        theme
     )
 
     draw_day_lines(
         canvas,
-        total_height
+        total_height,
+        theme
     )
 
     draw_events(
         canvas,
-        runtimes
+        runtimes,
+        theme
     )                                
