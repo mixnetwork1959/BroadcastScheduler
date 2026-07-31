@@ -1,12 +1,27 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.4.0
+# Version 4.5.0
 # gui_public_calendar.py
 # ==========================================
 
+import os
+import subprocess
+import sys
 import tkinter as tk
 from collections import defaultdict
-from tkinter import ttk, messagebox, colorchooser
+from pathlib import Path
+from tkinter import (
+    ttk,
+    messagebox,
+    colorchooser,
+    filedialog
+)
+
+from config import (
+    get_default_export_directory,
+    load_settings,
+    save_settings
+)
 
 from public_calendar_config import (
     PublicCalendarConfig,
@@ -35,12 +50,18 @@ class PublicCalendarTab:
         parent,
         events,
         runtimes,
-        config_filename="public_calendar.json"
+        config_filename="public_calendar.json",
+        settings=None
     ):
 
         self.parent = parent
         self.events = events
         self.runtimes = runtimes
+        self.settings = (
+            settings
+            if settings is not None
+            else load_settings()
+        )
 
         self.config = PublicCalendarConfig(
             config_filename
@@ -267,6 +288,24 @@ class PublicCalendarTab:
             toolbar,
             text="Publish Website",
             command=self.publish_website
+        ).pack(
+            side="right",
+            padx=2
+        )
+
+        ttk.Button(
+            toolbar,
+            text="Open Export Folder",
+            command=self.open_export_folder
+        ).pack(
+            side="right",
+            padx=2
+        )
+
+        ttk.Button(
+            toolbar,
+            text="Choose Export Folder",
+            command=self.choose_export_folder
         ).pack(
             side="right",
             padx=2
@@ -1287,6 +1326,69 @@ class PublicCalendarTab:
     # Publish Website
     # =================================================
 
+    def _export_directory(self):
+
+        configured = self.settings.get(
+            "export_directory",
+            ""
+        )
+
+        if configured:
+            return Path(configured).expanduser()
+
+        return get_default_export_directory()
+
+    def choose_export_folder(self):
+
+        current_directory = self._export_directory()
+
+        selected = filedialog.askdirectory(
+            parent=self.parent.winfo_toplevel(),
+            title="Choose Export Folder",
+            initialdir=str(current_directory)
+        )
+
+        if not selected:
+            return
+
+        self.settings["export_directory"] = selected
+        save_settings(self.settings)
+
+        messagebox.showinfo(
+            "Export Folder",
+            (
+                "The export folder was saved.\n\n"
+                f"Folder:\n{selected}"
+            )
+        )
+
+    def open_export_folder(self):
+
+        export_directory = self._export_directory()
+
+        try:
+            export_directory.mkdir(
+                parents=True,
+                exist_ok=True
+            )
+
+            if os.name == "nt":
+                os.startfile(str(export_directory))
+            elif sys.platform == "darwin":
+                subprocess.Popen(["open", str(export_directory)])
+            else:
+                subprocess.Popen(["xdg-open", str(export_directory)])
+
+        except (OSError, subprocess.SubprocessError) as error:
+            messagebox.showerror(
+                "Open Export Folder",
+                (
+                    "The export folder could not be opened.\n\n"
+                    f"Folder:\n{export_directory}\n\n"
+                    f"{error}"
+                )
+            )
+
     def publish_website(self):
 
         self.apply_editor(
@@ -1309,7 +1411,8 @@ class PublicCalendarTab:
             )
 
             output_file = generator.generate(
-                open_browser=True
+                open_browser=True,
+                output_directory=self._export_directory()
             )
 
         except Exception as error:
@@ -1328,7 +1431,8 @@ class PublicCalendarTab:
             "Publish Website",
             (
                 "The public calendar website was generated.\n\n"
-                f"File:\n{output_file}"
+                f"File:\n{output_file}\n\n"
+                "Use 'Open Export Folder' to open its location."
             )
         )
 

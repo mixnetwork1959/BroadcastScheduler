@@ -1,5 +1,5 @@
 # USER_GUIDE.md
-4.4.0
+4.5.0
 # Broadcast Scheduler User Guide
 
 ## Purpose

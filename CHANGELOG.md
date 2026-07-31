@@ -1,5 +1,21 @@
 # Changelog
 
+## Version 4.5.0
+
+### New
+
+- Public Calendar exports now use a visible folder in Documents by default
+- Choose Export Folder button
+- Open Export Folder button
+- Custom export folder is remembered automatically
+
+### Improvements
+
+- The complete generated file path is shown after publishing
+- Export files no longer depend on the hidden application directory
+
+---
+
 ## Version 4.4.0
 
 ### New

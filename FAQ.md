@@ -1,5 +1,5 @@
 # ❓ Frequently Asked Questions (FAQ)
-4.4.0
+4.5.0
 # General
 
 ## What is Broadcast Scheduler?
@@ -152,6 +152,15 @@ Whenever your RadioBOSS schedule changes:
 1. Open Broadcast Scheduler
 2. Click **Publish Website**
 3. Upload the new HTML file to your website
+
+By default, the file is saved in:
+
+```text
+Documents/Broadcast Scheduler/Export/index.html
+```
+
+Use **Choose Export Folder** to select another location and
+**Open Export Folder** to open it directly.
 
 Future versions will support automatic FTP publishing.
 

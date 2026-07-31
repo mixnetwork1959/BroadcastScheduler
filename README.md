@@ -1,6 +1,6 @@
 # 📅 Broadcast Scheduler for RadioBOSS
-4.4.0
-![Version](https://img.shields.io/badge/version-4.4.0-blue)
+4.5.0
+![Version](https://img.shields.io/badge/version-4.5.0-blue)
 
 > **A free open source companion tool for RadioBOSS.**
 >
@@ -101,8 +101,12 @@ The generated website is completely standalone and can be uploaded directly to a
 Click **Publish Website** to generate:
 
 ```text
-website_output/index.html
+Documents/Broadcast Scheduler/Export/index.html
 ```
+
+Use **Choose Export Folder** to select a different location. The selected
+folder is remembered automatically. Use **Open Export Folder** to open the
+generated file location directly in Windows Explorer.
 
 The generated website includes:
 

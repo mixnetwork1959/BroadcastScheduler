@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.3.1
+# Version 4.5.0
 # website_generator.py
 # ==========================================
 
@@ -12,16 +12,14 @@ import webbrowser
 from datetime import timedelta
 from pathlib import Path
 
-from config import load_settings
+from config import (
+    get_default_export_directory,
+    load_settings
+)
 from database import Database
 from scheduler_controller import SchedulerController
 from public_calendar_config import PublicCalendarConfig
 from public_calendar_engine import PublicCalendarEngine
-
-PROJECT_DIR = Path(__file__).resolve().parent
-OUTPUT_DIR = PROJECT_DIR / "website_output"
-OUTPUT_FILE = OUTPUT_DIR / "index.html"
-
 
 class PublicCalendarWebsiteGenerator:
 
@@ -37,7 +35,11 @@ class PublicCalendarWebsiteGenerator:
         self.config_filename = config_filename
         self.timezone_name = timezone_name
 
-    def generate(self, open_browser=True):
+    def generate(
+        self,
+        open_browser=True,
+        output_directory=None
+    ):
         settings = load_settings()
         events = Database(settings).load_events()
         runtimes = SchedulerController(events).refresh()
@@ -163,22 +165,37 @@ class PublicCalendarWebsiteGenerator:
             week_label=week_label,
         )
 
-        OUTPUT_DIR.mkdir(
+        configured_directory = settings.get(
+            "export_directory",
+            ""
+        )
+
+        if output_directory:
+            export_directory = Path(output_directory)
+        elif configured_directory:
+            export_directory = Path(configured_directory)
+        else:
+            export_directory = get_default_export_directory()
+
+        export_directory = export_directory.expanduser()
+        output_file = export_directory / "index.html"
+
+        export_directory.mkdir(
             parents=True,
             exist_ok=True
         )
 
-        OUTPUT_FILE.write_text(
+        output_file.write_text(
             document,
             encoding="utf-8"
         )
 
         if open_browser:
             webbrowser.open(
-                OUTPUT_FILE.resolve().as_uri()
+                output_file.resolve().as_uri()
             )
 
-        return OUTPUT_FILE
+        return output_file
 
     def _document(self, programs, week_label):
         station_name = html.escape(self.station_name)

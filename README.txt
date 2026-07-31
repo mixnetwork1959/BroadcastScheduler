@@ -1,4 +1,4 @@
-Broadcast Scheduler 4.4.0 – Theme System
+Broadcast Scheduler 4.5.0 – Public Calendar Export
 
 Included files:
 - gui.py
@@ -28,9 +28,18 @@ Usage:
 3. Click Publish Website.
 
 Output:
-website_output/index.html
+Documents\Broadcast Scheduler\Export\index.html
 
-New in 4.4.0:
+Use Choose Export Folder to select another location.
+Use Open Export Folder to open the generated file location.
+
+New in 4.5.0:
+- Public Calendar exports to a visible Documents folder
+- Custom export folder selection
+- Open Export Folder button
+- Selected export location is saved automatically
+
+Included from 4.4.0:
 - Four selectable application themes
 - Radio Albena is the default theme
 - Theme selection is saved automatically

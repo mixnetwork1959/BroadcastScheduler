@@ -1,5 +1,5 @@
 # 🗺️ Broadcast Scheduler Roadmap
-4.4.0
+4.5.0
 This roadmap shows the planned direction of the project.
 
 The order of features may change based on user feedback and RadioBOSS compatibility.
@@ -14,6 +14,17 @@ The order of features may change based on user feedback and RadioBOSS compatibil
 - ✅ Midnight Studio
 - ✅ Coastal Light
 - ✅ Color Wave
+
+---
+
+# Version 4.5.0
+
+## Public Calendar Export
+
+- ✅ Visible export folder in Documents
+- ✅ Custom export folder selection
+- ✅ Open Export Folder button
+- ✅ Remembered export location
 - ✅ Saved theme selection
 
 ---

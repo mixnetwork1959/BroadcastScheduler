@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.4.0
+# Version 4.5.0
 # gui.py
 # ==========================================
 
@@ -50,7 +50,7 @@ def show_events(controller, runtimes, settings):
 
     root = tk.Tk()
 
-    root.title("Broadcast Scheduler 4.4.0")
+    root.title("Broadcast Scheduler 4.5.0")
     root.geometry("1600x900")
 
     theme_id = settings.get(
@@ -175,7 +175,8 @@ def show_events(controller, runtimes, settings):
     public_calendar = PublicCalendarTab(
         public_calendar_tab,
         controller.events,
-        runtimes
+        runtimes,
+        settings=settings
     )
 
     # Sortierung aktivieren

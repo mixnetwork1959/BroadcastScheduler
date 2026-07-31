@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.4.0
+# Version 4.5.0
 # scheduler.py
 # ==========================================
 
@@ -9,7 +9,7 @@ from database import Database
 from scheduler_controller import SchedulerController
 from gui import show_events
 
-VERSION = "4.4.0"
+VERSION = "4.5.0"
 
 
 def main():

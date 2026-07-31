@@ -1,5 +1,5 @@
 # 📘 Broadcast Scheduler Installation Guide
-4.4.0
+4.5.0
 ## Requirements
 
 - Windows 10 / Windows 11
@@ -66,8 +66,12 @@ Click **Publish Website**.
 Broadcast Scheduler creates:
 
 ```text
-website_output/index.html
+Documents/Broadcast Scheduler/Export/index.html
 ```
+
+Use **Choose Export Folder** to select another location. The selected folder
+is remembered. Click **Open Export Folder** to open the generated file in
+Windows Explorer.
 
 The generated HTML file is completely standalone and can be uploaded directly to your web server.
 
