@@ -56,6 +56,17 @@ class PublicCalendarWebsiteGenerator:
 
         programs = []
 
+        week_start_date = (
+            min(runtime.start for runtime in runtimes).date()
+            if runtimes
+            else None
+        )
+        week_end_date = (
+            week_start_date + timedelta(days=6)
+            if week_start_date
+            else None
+        )
+
         for block in blocks:
             duration_minutes = int(
                 (block.end - block.start).total_seconds() // 60
@@ -115,16 +126,31 @@ class PublicCalendarWebsiteGenerator:
             )
 
             # Second part: next day from 00:00 until the actual end.
-            programs.append(
-                {
-                    **common_data,
-                    "start": midnight.isoformat(),
-                    "end": block.end.isoformat(),
-                    "day": block.end.strftime("%A"),
-                    "start_time": "00:00",
-                    "end_time": block.end.strftime("%H:%M"),
-                }
-            )
+            # RadioBOSS events may start a few seconds after the full hour.
+            # At the end of Sunday this can create an artificial fragment
+            # such as Monday 00:00:00-00:00:08. Do not export that fragment
+            # or place it into the Monday column of the current week.
+            spill_seconds = (
+                block.end - midnight
+            ).total_seconds()
+
+            if (
+                spill_seconds >= 60
+                and (
+                    week_end_date is None
+                    or midnight.date() <= week_end_date
+                )
+            ):
+                programs.append(
+                    {
+                        **common_data,
+                        "start": midnight.isoformat(),
+                        "end": block.end.isoformat(),
+                        "day": block.end.strftime("%A"),
+                        "start_time": "00:00",
+                        "end_time": block.end.strftime("%H:%M"),
+                    }
+                )
 
         week_label = "No programs selected"
 
@@ -151,9 +177,9 @@ class PublicCalendarWebsiteGenerator:
                 ) < 18 * 60
             ]
 
-            if visible_starts and visible_ends:
-                start = min(visible_starts)
-                end = max(visible_ends)
+            if week_start_date and week_end_date:
+                start = week_start_date
+                end = week_end_date
 
                 week_label = (
                     f"{start.strftime('%b')} {start.day} – "
