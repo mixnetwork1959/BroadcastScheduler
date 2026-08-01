@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.4.0
+# Version 4.5.1
 # gui_treeview.py
 # ==========================================
 
@@ -82,7 +82,7 @@ def create_treeview(parent):
 
     tree.column(
         "Status",
-        width=90,
+        width=190,
         anchor="center"
     )
 

@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.5.0
+# Version 4.5.1
 # gui_public_calendar.py
 # ==========================================
 
@@ -85,8 +85,6 @@ class PublicCalendarTab:
         self.editor_color_var = tk.StringVar(
             value="#4EA3FF"
         )
-        self.editor_selected_var = tk.BooleanVar()
-
         self._build_gui()
         self._load_candidates()
 
@@ -286,7 +284,7 @@ class PublicCalendarTab:
 
         ttk.Button(
             toolbar,
-            text="Publish Website",
+            text="Generate Website",
             command=self.publish_website
         ).pack(
             side="right",
@@ -313,7 +311,7 @@ class PublicCalendarTab:
 
         ttk.Button(
             toolbar,
-            text="Save",
+            text="Save Settings",
             command=self.save
         ).pack(
             side="right",
@@ -328,8 +326,9 @@ class PublicCalendarTab:
         info = ttk.Label(
             self.frame,
             text=(
-                "Suggested Programs shows likely long music blocks. "
-                "Select a program on the left and edit its public appearance on the right."
+                "First, tick the box in the Publish column for each program you want to include. "
+                "Edit its public details, then click Save Settings. "
+                "Finally, click Generate Website to create the updated public calendar."
             )
         )
 
@@ -491,34 +490,9 @@ class PublicCalendarTab:
 
         ttk.Label(
             editor_box,
-            text="Publish:"
-        ).grid(
-            row=0,
-            column=0,
-            sticky="w",
-            padx=8,
-            pady=8
-        )
-
-        self.editor_publish_check = ttk.Checkbutton(
-            editor_box,
-            variable=self.editor_selected_var,
-            command=self._editor_changed
-        )
-
-        self.editor_publish_check.grid(
-            row=0,
-            column=1,
-            sticky="w",
-            padx=8,
-            pady=8
-        )
-
-        ttk.Label(
-            editor_box,
             text="Public Name:"
         ).grid(
-            row=1,
+            row=0,
             column=0,
             sticky="w",
             padx=8,
@@ -531,7 +505,7 @@ class PublicCalendarTab:
         )
 
         self.editor_name_entry.grid(
-            row=1,
+            row=0,
             column=1,
             sticky="ew",
             padx=8,
@@ -542,7 +516,7 @@ class PublicCalendarTab:
             editor_box,
             text="Description:"
         ).grid(
-            row=2,
+            row=1,
             column=0,
             sticky="nw",
             padx=8,
@@ -556,7 +530,7 @@ class PublicCalendarTab:
         )
 
         self.description_text.grid(
-            row=2,
+            row=1,
             column=1,
             sticky="ew",
             padx=8,
@@ -567,7 +541,7 @@ class PublicCalendarTab:
             editor_box,
             text="Color:"
         ).grid(
-            row=3,
+            row=2,
             column=0,
             sticky="w",
             padx=8,
@@ -579,7 +553,7 @@ class PublicCalendarTab:
         )
 
         color_frame.grid(
-            row=3,
+            row=2,
             column=1,
             sticky="w",
             padx=8,
@@ -808,10 +782,6 @@ class PublicCalendarTab:
 
         self.current_row = row
 
-        self.editor_selected_var.set(
-            row["selected_var"].get()
-        )
-
         self.editor_name_var.set(
             row["public_name"]
         )
@@ -848,10 +818,6 @@ class PublicCalendarTab:
 
         if self.current_row is None:
             return
-
-        self.current_row["selected_var"].set(
-            self.editor_selected_var.get()
-        )
 
         public_name = self.editor_name_var.get().strip()
 
@@ -908,10 +874,6 @@ class PublicCalendarTab:
             "normal"
             if enabled
             else "disabled"
-        )
-
-        self.editor_publish_check.configure(
-            state=state
         )
 
         self.editor_name_entry.configure(
@@ -1323,7 +1285,7 @@ class PublicCalendarTab:
             return "#FFFFFF"
 
     # =================================================
-    # Publish Website
+    # Generate Website
     # =================================================
 
     def _export_directory(self):
@@ -1418,7 +1380,7 @@ class PublicCalendarTab:
         except Exception as error:
 
             messagebox.showerror(
-                "Publish Website",
+                "Generate Website",
                 (
                     "The website could not be generated.\n\n"
                     f"{error}"
@@ -1428,7 +1390,7 @@ class PublicCalendarTab:
             return
 
         messagebox.showinfo(
-            "Publish Website",
+            "Generate Website",
             (
                 "The public calendar website was generated.\n\n"
                 f"File:\n{output_file}\n\n"

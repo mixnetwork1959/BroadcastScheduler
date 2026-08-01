@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.4.0
+# Version 4.5.1
 # gui_calendar.py
 # ==========================================
 
@@ -291,19 +291,32 @@ def show_event_details(rt):
         else "-"
     )
 
-    conflict = (
-        "Yes"
-        if getattr(rt, "conflict", False)
-        else "No"
+    conflict_events = getattr(
+        rt,
+        "conflict_events",
+        []
     )
+
+    if conflict_events:
+        conflict_lines = "\n".join(
+            f"• {other.event.name} [{other.event.group}]"
+            for other in conflict_events
+        )
+        conflict_details = (
+            "Possible conflict with:\n"
+            f"{conflict_lines}\n"
+            f"Same scheduled start: {rt.start:%H:%M:%S}"
+        )
+    else:
+        conflict_details = "Possible conflict: No"
 
     details = (
         f"Event: {event_name}\n"
         f"ID: {event_id or '-'}\n"
         f"Group: {group or '-'}\n\n"
         f"Start: {start_text}\n"
-        f"End: {end_text}\n"
-        f"Conflict: {conflict}\n\n"
+        f"End: {end_text}\n\n"
+        f"{conflict_details}\n\n"
         f"BackColor: {back_color or '-'}\n"
         f"FontColor: {font_color or '-'}"
     )

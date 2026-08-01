@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.5.0
+# Version 4.5.1
 # website_generator.py
 # ==========================================
 
@@ -217,7 +217,7 @@ class PublicCalendarWebsiteGenerator:
 }}
 * {{ box-sizing:border-box; }}
 html {{ color-scheme:dark; }}
-body {{ margin:0; min-height:100vh; background:radial-gradient(circle at top,#14243d 0,#07111f 46%); color:var(--text); font-family:Inter,"Segoe UI",Arial,sans-serif; }}
+body {{ margin:0; min-height:100vh; background:radial-gradient(circle at top,#14243d 0,#07111f 46%); color:var(--text); font-family:"Segoe UI",Tahoma,Arial,sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility; }}
 .app {{ width:min(1850px,100%); margin:0 auto; padding:24px; }}
 .topbar {{ display:flex; align-items:center; justify-content:space-between; gap:24px; padding-bottom:18px; border-bottom:1px solid var(--border); }}
 .brand {{ display:flex; align-items:center; gap:14px; }}
@@ -242,11 +242,11 @@ body {{ margin:0; min-height:100vh; background:radial-gradient(circle at top,#14
 .time-column {{ position:sticky; left:0; z-index:5; border-right:1px solid var(--border); background:#0a1423; }}
 .time-label {{ height:var(--hour-height); padding:8px 10px; border-bottom:1px solid var(--border); color:#dce7f7; font-size:.82rem; font-weight:700; }}
 .day-column {{ position:relative; min-height:calc(var(--hour-height) * 24); border-right:1px solid var(--border); background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--hour-height) - 1px),#293850 calc(var(--hour-height) - 1px),#293850 var(--hour-height)); }}
-.program {{ position:absolute; left:5px; right:5px; overflow:hidden; padding:9px; border:1px solid rgb(255 255 255 / 22%); border-radius:8px; box-shadow:inset 0 1px rgb(255 255 255 / 15%),0 4px 12px rgb(0 0 0 / 20%); }}
+.program {{ position:absolute; left:5px; right:5px; overflow:hidden; padding:9px; border:1px solid rgb(255 255 255 / 22%); border-radius:8px; box-shadow:inset 0 1px rgb(255 255 255 / 15%),0 4px 12px rgb(0 0 0 / 20%); text-shadow:none; }}
 .program.is-live {{ z-index:4; outline:3px solid var(--accent); outline-offset:-3px; box-shadow:inset 0 1px rgb(255 255 255 / 20%),0 0 0 2px rgb(255 138 0 / 25%),0 0 22px rgb(255 138 0 / 55%); }}
-.program-time {{ font-size:.72rem; opacity:.9; }}
-.program-title {{ margin-top:5px; font-size:.88rem; font-weight:900; }}
-.program-description {{ margin-top:5px; font-size:.73rem; line-height:1.35; opacity:.95; }}
+.program-time {{ font-size:.72rem; font-weight:500; line-height:1.3; opacity:.92; }}
+.program-title {{ margin-top:5px; font-size:.86rem; font-weight:700; line-height:1.32; }}
+.program-description {{ margin-top:5px; font-size:.74rem; font-weight:500; line-height:1.42; opacity:.96; }}
 .program-progress {{ position:absolute; right:8px; bottom:8px; left:8px; height:5px; overflow:hidden; border-radius:99px; background:rgb(0 0 0 / 28%); }}
 .program-progress > span {{ display:block; width:0; height:100%; border-radius:inherit; background:#fff; transition:width .35s ease; }}
 .current-time-line {{ position:absolute; right:0; left:0; z-index:6; height:2px; pointer-events:none; background:#ff3b30; box-shadow:0 0 7px rgb(255 59 48 / 80%); }}

@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 3.0.0
+# Version 4.5.1
 # analyzer.py
 #
 # Schedule Analyzer
@@ -39,6 +39,7 @@ class Analyzer:
         for runtime in self.runtimes:
             runtime.conflict = False
             runtime.conflict_count = 0
+            runtime.conflict_events = []
             groups[runtime.start].append(runtime)
 
         unique_times = len(groups)
@@ -53,6 +54,11 @@ class Analyzer:
                 for runtime in runtimes:
                     runtime.conflict = True
                     runtime.conflict_count = len(runtimes)
+                    runtime.conflict_events = [
+                        other
+                        for other in runtimes
+                        if other is not runtime
+                    ]
 
                     conflicts += 1
 

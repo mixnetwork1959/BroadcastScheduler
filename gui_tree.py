@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 3.0.0
+# Version 4.5.1
 # gui_tree.py
 # ==========================================
 
@@ -60,6 +60,7 @@ def populate_tree(
     """
 
     tree.delete(*tree.get_children())
+    tree._runtime_by_item = {}
 
     search = search.lower().strip()
 
@@ -117,7 +118,7 @@ def populate_tree(
                 2
             )
 
-            status = f"⚠ {count} events"
+            status = f"⚠ Possible conflict ({count})"
 
         else:
 
@@ -129,7 +130,7 @@ def populate_tree(
             else ()
         )
 
-        tree.insert(
+        item_id = tree.insert(
             "",
             "end",
             values=(
@@ -140,3 +141,5 @@ def populate_tree(
             ),
             tags=tags
         )
+
+        tree._runtime_by_item[item_id] = rt

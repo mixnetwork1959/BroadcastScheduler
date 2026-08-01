@@ -1,6 +1,6 @@
 # ==========================================
 # Broadcast Scheduler
-# Version 4.5.0
+# Version 4.5.1
 # gui.py
 # ==========================================
 
@@ -29,7 +29,8 @@ from gui_treeview import (
 )
 from gui_calendar import (
     create_calendar,
-    draw_calendar
+    draw_calendar,
+    show_event_details
 )
 from gui_public_calendar import (
     PublicCalendarTab
@@ -235,6 +236,23 @@ def show_events(controller, runtimes, settings):
             search_var.get()
         )
 
+    def show_selected_event(event=None):
+
+        item_id = tree.identify_row(event.y) if event else ""
+
+        if not item_id:
+            selection = tree.selection()
+            item_id = selection[0] if selection else ""
+
+        runtime = getattr(
+            tree,
+            "_runtime_by_item",
+            {}
+        ).get(item_id)
+
+        if runtime is not None:
+            show_event_details(runtime)
+
     def redraw_calendar(event=None):
 
         draw_calendar(
@@ -381,6 +399,11 @@ def show_events(controller, runtimes, settings):
     search_var.trace_add(
         "write",
         lambda *args: refresh_tree()
+    )
+
+    tree.bind(
+        "<Double-Button-1>",
+        show_selected_event
     )
 
     # =====================================================
